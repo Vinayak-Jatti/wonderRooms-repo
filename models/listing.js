@@ -1,24 +1,37 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Define the schema
 const listingSchema = new Schema({
   title: {
     type: String,
     required: true,
   },
-  description: String,
-  image: {
+  description: {
     type: String,
-    required: true,
-    set: (v) =>
-      v === ""
-        ? "https://unsplash.com/photos/silhouette-of-person-standing-on-rock-surrounded-by-body-of-water-odxB5oIG_iA"
-        : v,
+    default: "",
   },
-  price: Number,
-  location: String,
-  country: String,
+  image: {
+    filename: String,
+    url: {
+      type: String,
+      required: true,
+    },
+  },
+  price: {
+    type: Number,
+    default: 0,
+  },
+  location: {
+    type: String,
+    default: "",
+  },
+  country: {
+    type: String,
+    default: "",
+  },
 });
 
+// Create and export the model
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
