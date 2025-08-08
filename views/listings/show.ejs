@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listing Details</title>
+  </head>
+  <body>
+    <h3>Listing Details:</h3>
+    <ul>
+      <li>
+        Title: <%= listing && listing.title ? listing.title : "No title" %>
+      </li>
+      <li>
+        Description: <%= listing && listing.description ? listing.description :
+        "No description" %>
+      </li>
+      <li>Price: ₹<%= listing && listing.price ? listing.price : "N/A" %></li>
+      <li>
+        Location: <%= listing && listing.location ? listing.location : "N/A" %>
+      </li>
+      <li>
+        Country: <%= listing && listing.country ? listing.country : "N/A" %>
+      </li>
+    </ul>
+
+    <br />
+
+    <a href="/listings/<%= listing._id %>/edit">Edit</a>
+    <br />
+    <form method="POST" action="/listing/<%= listing._id %>?_method=DELETE">
+      <button type="submit">Delete</button>
+    </form>
+  </body>
+</html>

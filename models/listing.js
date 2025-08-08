@@ -15,7 +15,7 @@ const listingSchema = new Schema({
     filename: String,
     url: {
       type: String,
-      required: true,
+      default: "", // ✅ default to empty string instead of required
     },
   },
   price: {

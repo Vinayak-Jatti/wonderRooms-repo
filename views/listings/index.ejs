@@ -1,0 +1,24 @@
+<!-- The provided code is an HTML document that includes some basic structure and elements. Here's a breakdown of what each part does: -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wonderlust</title>
+  </head>
+  <body>
+    <h1>It works!</h1>
+
+    <form method="get" action="/listings/new">
+      <button>Create new listings</button>
+    </form>
+
+    <ul>
+      <% for(let listing of allListings){ %>
+      <li>
+        <a href="/listing/<%= listing._id %>"> <%= listing.title %> </a>
+      </li>
+      <% } %>
+    </ul>
+  </body>
+</html>
