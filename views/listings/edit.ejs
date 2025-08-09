@@ -1,47 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Listing</title>
-  </head>
-  <body>
-    <h3>Edit your listing</h3>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
-      <input
-        name="listing[title]"
-        value="<%= listing.title %>"
-        type="text"
-        required
-      />
-      <br />
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+  <div class="col-8 offset-2">
+    <div class="container my-5">
+      <h3 class="mb-4">Edit your listing</h3>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+        <div class="mb-3">
+          <label for="title" class="form-label">
+            Title <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="listing[title]"
+            value="<%= listing.title %>"
+            placeholder="Enter Title"
+            required
+          />
+        </div>
 
-      <textarea name="listing[description]">
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            name="listing[description]"
+            rows="4"
+            placeholder="Enter Description"
+            class="form-control"
+          >
 <%= listing.description %></textarea
-      >
-      <br />
+          >
+        </div>
 
-      <input name="listing[image]" value="<%= listing.image %>" type="text" />
-      <br />
+        <div class="mb-3">
+          <label for="imageFilename" class="form-label">Image Filename</label>
+          <input
+            type="text"
+            class="form-control"
+            id="imageFilename"
+            name="listing[image][filename]"
+            value="<%= listing.image ? listing.image.filename : '' %>"
+            placeholder="Enter Image Filename"
+          />
+        </div>
 
-      <input name="listing[price]" value="<%= listing.price %>" type="number" />
-      <br />
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">Image URL</label>
+          <input
+            type="text"
+            class="form-control"
+            id="imageUrl"
+            name="listing[image][url]"
+            value="<%= listing.image ? listing.image.url : '' %>"
+            placeholder="Enter Image URL"
+          />
+        </div>
 
-      <input
-        name="listing[location]"
-        value="<%= listing.location %>"
-        type="text"
-      />
-      <br />
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="listing[price]"
+              value="<%= listing.price %>"
+              placeholder="Enter Price"
+            />
+          </div>
 
-      <input
-        name="listing[country]"
-        value="<%= listing.country %>"
-        type="text"
-      />
-      <br />
+          <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input
+              type="text"
+              class="form-control"
+              id="country"
+              name="listing[country]"
+              value="<%= listing.country %>"
+              placeholder="Enter Country"
+            />
+          </div>
+        </div>
 
-      <button type="submit">Update</button>
-    </form>
-  </body>
-</html>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="location"
+            name="listing[location]"
+            value="<%= listing.location %>"
+            placeholder="Enter Location"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
