@@ -122,3 +122,8 @@ body {
   /* opacity: 0.15 !important; */
   transform: scale(1.1);
 }
+
+/* Show Page */
+.show-img {
+  height: 30vh;
+}
