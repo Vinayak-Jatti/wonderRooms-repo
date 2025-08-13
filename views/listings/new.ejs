@@ -3,11 +3,16 @@
   <div class="col-8 offset-2">
     <div class="container my-5">
       <h3 class="mb-4">Create New Listing</h3>
-      <form action="/listings" method="post">
+      <form
+        action="/listings"
+        method="post"
+        class="needs-validation"
+        novalidate
+      >
         <div class="mb-3">
-          <label for="title" class="form-label"
-            >Title <span class="text-danger">*</span></label
-          >
+          <label for="title" class="form-label">
+            Title <span class="text-danger">*</span>
+          </label>
           <input
             type="text"
             class="form-control"
@@ -16,17 +21,11 @@
             placeholder="Enter Title"
             required
           />
+          <div class="invalid-feedback">Please enter a title.</div>
         </div>
 
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <!-- <input
-          type="text"
-          class="form-control"
-          id="description"
-          name="listing[description]"
-          placeholder="Enter Description"
-        /> -->
           <textarea
             name="listing[description]"
             id="description"
@@ -67,7 +66,9 @@
               id="price"
               name="listing[price]"
               placeholder="Enter Price"
+              required
             />
+            <div class="invalid-feedback">Please enter a price.</div>
           </div>
 
           <div class="mb-3 col-md-8">
@@ -78,7 +79,9 @@
               id="country"
               name="listing[country]"
               placeholder="Enter Country"
+              required
             />
+            <div class="invalid-feedback">Please enter a country.</div>
           </div>
         </div>
 
@@ -90,8 +93,11 @@
             id="location"
             name="listing[location]"
             placeholder="Enter Location"
+            required
           />
+          <div class="invalid-feedback">Please enter a location.</div>
         </div>
+
         <br />
         <button type="submit" class="btn btn-dark add-btn">
           Add-to-Listings
