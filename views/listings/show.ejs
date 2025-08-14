@@ -13,8 +13,9 @@
         <h5 class="card-title"><%= listing.title %></h5>
         <p class="card-text"><%= listing.description %></p>
         <p class="card-text">
-          <strong>Price:</strong> &#8377;<%= listing.price ?
-          listing.price.toLocaleString("en-IN") : "N/A" %>/night
+          <strong>Price:</strong>
+          &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") :
+          "N/A" %>/night
         </p>
         <p class="card-text">
           <strong>Location:</strong> <%= listing.location %>, <%=
@@ -27,7 +28,7 @@
         >
         <form
           method="POST"
-          action="/listing/<%= listing._id %>?_method=DELETE"
+          action="/listings/<%= listing._id %>?_method=DELETE"
           class="d-inline"
         >
           <button
