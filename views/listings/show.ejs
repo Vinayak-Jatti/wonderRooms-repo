@@ -10,6 +10,7 @@
         class="card-img-top show-img"
       />
       <div class="card-body">
+        <br />
         <h5 class="card-title"><%= listing.title %></h5>
         <p class="card-text"><%= listing.description %></p>
         <p class="card-text">
@@ -38,6 +39,37 @@
           >
             Delete
           </button>
+        </form>
+      </div>
+
+      <div class="card-body border-top mt-3">
+        <h4 class="mb-3">Leave a Review</h4>
+        <form action="/listings/<%= listing._id %>/reviews" method="POST">
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input
+              type="range"
+              class="form-range"
+              min="1"
+              max="5"
+              id="rating"
+              name="review[rating]"
+            />
+            <div class="d-flex justify-content-between small text-muted">
+              <span>1</span>
+              <span>5</span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="comment" class="form-label">Comments</label>
+            <textarea
+              class="form-control"
+              name="review[comment]"
+              id="comment"
+              rows="5"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-outline-success">Submit</button>
         </form>
       </div>
     </div>

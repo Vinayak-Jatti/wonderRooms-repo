@@ -7,6 +7,7 @@ const Listing = require("./models/listing");
 const wrapAsync = require("./utils/wrspAsync");
 const ExpressError = require("./utils/ExpressError");
 const { listingSchema } = require("./schema.js");
+const Review = require("./models/review");
 // const listingSchema = require("./schema.js");
 
 // ==== Connetions ====
@@ -126,6 +127,22 @@ app.delete(
     res.redirect("/listings");
   })
 );
+
+//reviews
+app.post("/listings/:id/reviews", async (req, res) => {
+  try {
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review); // ✅ lowercase 'review'
+    listing.reviews.push(newReview);
+    await newReview.save();
+    await listing.save();
+    console.log("new review saved!");
+    res.redirect(`/listings/${listing._id}`);
+  } catch (err) {
+    console.log(err);
+    res.send("Error saving review");
+  }
+});
 
 //Custom error:
 app.get("/test-error", (req, res) => {
