@@ -6,7 +6,7 @@ const ejsMate = require("ejs-mate");
 const Listing = require("./models/listing");
 const wrapAsync = require("./utils/wrspAsync");
 const ExpressError = require("./utils/ExpressError");
-const { listingSchema } = require("./schema.js");
+const { listingSchema, reviewSchema } = require("./schema.js");
 const Review = require("./models/review");
 // const listingSchema = require("./schema.js");
 
@@ -34,17 +34,19 @@ wrapAsync(async () => {
 })();
 
 // ===== midleware validetion =====
-// const validateListing = (req, res, next) => {
-//   const { error } = listingSchema.validate(req.body);
-//   if (error) {
-//     throw new ExpressError(400, result.error);
-//   } else {
-//     next();
-//   }
-// };
-
 const validateListing = (req, res, next) => {
   const { error } = listingSchema.validate(req.body);
+  if (error) {
+    // Extract the error message from Joi
+    const msg = error.details.map((el) => el.message).join(", ");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
   if (error) {
     // Extract the error message from Joi
     const msg = error.details.map((el) => el.message).join(", ");
@@ -80,7 +82,7 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     res.render("listings/show.ejs", { listing });
   })
 );
@@ -129,20 +131,19 @@ app.delete(
 );
 
 //reviews
-app.post("/listings/:id/reviews", async (req, res) => {
-  try {
+app.post(
+  "/listings/:id/reviews",
+  validateReview,
+  wrapAsync(async (req, res) => {
     let listing = await Listing.findById(req.params.id);
-    let newReview = new Review(req.body.review); // ✅ lowercase 'review'
+    let newReview = new Review(req.body.review);
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
     console.log("new review saved!");
     res.redirect(`/listings/${listing._id}`);
-  } catch (err) {
-    console.log(err);
-    res.send("Error saving review");
-  }
-});
+  })
+);
 
 //Custom error:
 app.get("/test-error", (req, res) => {
@@ -159,9 +160,3 @@ app.use((err, req, res, next) => {
   // res.status(statusCode || 500).send(message || "Something went wrong");
   res.render("error.ejs");
 });
-
-// app.use((err, req, res, next) => {
-//   const statusCode = err.statusCode || 500;
-//   const message = err.message || "Something went wrong";
-//   res.status(statusCode).render("error", { statusCode, message });
-// });
