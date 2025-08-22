@@ -1,5 +1,6 @@
 const { ref } = require("joi");
 const mongoose = require("mongoose");
+const review = require("./review");
 const Schema = mongoose.Schema;
 
 // Define the schema
@@ -37,6 +38,15 @@ const listingSchema = new Schema({
       ref: "Review",
     },
   ],
+});
+
+// middleware for deleting associated reviews
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await Review.deleteMany({
+      _id: { $in: listing.reviews },
+    });
+  }
 });
 
 // Create and export the model

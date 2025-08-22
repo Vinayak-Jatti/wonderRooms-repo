@@ -145,6 +145,16 @@ app.post(
   })
 );
 
+app.delete(
+  "/listings/:id/reviews/:reviewId",
+  wrapAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
+  })
+);
+
 //Custom error:
 app.get("/test-error", (req, res) => {
   throw new Error("This is a test error!");
