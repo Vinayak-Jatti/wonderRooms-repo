@@ -1,6 +1,6 @@
 const { ref } = require("joi");
 const mongoose = require("mongoose");
-const review = require("./review");
+const Review = require("./review");
 const Schema = mongoose.Schema;
 
 // Define the schema
@@ -17,7 +17,7 @@ const listingSchema = new Schema({
     filename: String,
     url: {
       type: String,
-      default: "", // ✅ default to empty string instead of required
+      default: "",
     },
   },
   price: {
