@@ -38,7 +38,7 @@ const sessionOptions = {
   },
 };
 
-// ======== Passport ==========
+// ======== Passport ===========
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -50,6 +50,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.messages = req.session.messages || {};
   req.session.messages = {}; // clear after use
+  res.locals.currUser = req.user;
   next();
 });
 

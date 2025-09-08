@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/user.js");
 const passport = require("passport");
 const wrapAsync = require("../utils/wrspAsync");
+const { isLoggedIn } = require("../middleware.js");
 
 // === Signup Form ===
 router.get("/signup", (req, res) => {
@@ -49,9 +50,11 @@ router.post(
 );
 
 // === Logout ===
-router.get("/logout", (req, res, next) => {
-  req.logout(function (err) {
-    if (err) return next(err);
+router.get("/logout", isLoggedIn, (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
     req.flash("success", "👋 You’ve been logged out successfully!");
     res.redirect("/listings");
   });

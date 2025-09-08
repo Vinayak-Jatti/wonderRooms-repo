@@ -24,17 +24,30 @@
     />
   </head>
   <body>
-    <%- include("../include/navbar") %> <% if (messages.success) { %>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <%= messages.success %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <%- include("../include/navbar") %>
+    <div class="col-8 offset-2">
+      <!-- <div class="container my-5"> -->
+      <% if (messages.success) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= messages.success %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+        ></button>
+      </div>
+      <% } %> <% if (messages.error) { %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= messages.error %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+        ></button>
+      </div>
+      <% } %>
+      <!-- </div> -->
     </div>
-    <% } %> <% if (messages.error) { %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <%= messages.error %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    <% } %>
 
     <div class="container"><%- body %></div>
 
