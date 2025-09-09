@@ -10,6 +10,10 @@
         class="card-img-top show-img"
       />
       <div class="card-body">
+        <p>
+          Owned By :
+          <i><%= listing.owner ? listing.owner.username : "Unknown" %></i>
+        </p>
         <br />
         <h5 class="card-title"><%= listing.title %></h5>
         <p class="card-text"><%= listing.description %></p>
