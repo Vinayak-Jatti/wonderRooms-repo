@@ -9,6 +9,7 @@
         alt="Listing Image"
         class="card-img-top show-img"
       />
+
       <div class="card-body">
         <p>
           Owned By :
@@ -27,6 +28,9 @@
           listing.country %>
         </p>
       </div>
+
+      <% if (currUser && listing.owner && currUser._id.toString() ===
+      listing.owner._id.toString()) { %>
       <div class="btn-container my-3">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark me-2"
           >Edit</a
@@ -45,7 +49,7 @@
           </button>
         </form>
       </div>
-
+      <% } %> <% if(currUser) { %>
       <!-- Leave a Review -->
       <div class="card-body border-top mt-3">
         <h4 class="mb-3">Leave a Review</h4>
@@ -86,17 +90,19 @@
           <button type="submit" class="btn btn-outline-success">Submit</button>
         </form>
       </div>
+      <% } %>
 
       <!-- Show Reviews -->
       <div class="card-body border-top mt-4">
         <h4 class="mb-3">Reviews</h4>
-        <% if (listing.reviews.length > 0) { %>
+        <% if (listing.reviews && listing.reviews.length > 0) { %>
         <ul class="list-group">
           <% listing.reviews.forEach(review => { %>
           <li
             class="list-group-item d-flex justify-content-between align-items-center"
           >
             <div>
+              <h5>@<%= review.author.username %></h5>
               <strong>⭐ <%= review.rating %></strong>
               <p class="mb-1"><%= review.comment %></p>
             </div>
