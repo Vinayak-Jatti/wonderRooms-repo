@@ -49,7 +49,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.messages = req.session.messages || {};
-  req.session.messages = {}; // clear after use
+  req.session.messages = {};
   res.locals.currUser = req.user;
   next();
 });
