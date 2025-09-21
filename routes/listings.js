@@ -5,6 +5,9 @@ const ExpressError = require("../utils/ExpressError");
 const { listingSchema } = require("../schema.js");
 const { isLoggedIn } = require("../middleware.js");
 const listings = require("../controllers/listings");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
 
 // ===== middleware validation =====
 const validateListing = (req, res, next) => {
@@ -23,7 +26,12 @@ const validateListing = (req, res, next) => {
 router
   .route("/")
   .get(wrapAsync(listings.index)) // Index
-  .post(isLoggedIn, validateListing, wrapAsync(listings.createListing)); // Create
+  .post(
+    isLoggedIn,
+    validateListing,
+    upload.single("listing[image]"),
+    wrapAsync(listings.createListing)
+  ); // Create
 
 // New form (separate, because it's just GET)
 router.get("/new", isLoggedIn, listings.renderNewForm);
@@ -32,7 +40,12 @@ router.get("/new", isLoggedIn, listings.renderNewForm);
 router
   .route("/:id")
   .get(wrapAsync(listings.showListing)) // Show
-  .put(isLoggedIn, validateListing, wrapAsync(listings.updateListing)) // Update
+  .put(
+    isLoggedIn,
+    upload.single("listing[image]"),
+    validateListing,
+    wrapAsync(listings.updateListing)
+  ) // Update
   .delete(isLoggedIn, wrapAsync(listings.deleteListing)); // Delete
 
 // Edit form

@@ -7,6 +7,7 @@
         action="/listings"
         method="post"
         class="needs-validation"
+        enctype="multipart/form-data"
         novalidate
       >
         <div class="mb-3">
@@ -37,7 +38,7 @@
           <div class="invalid-feedback">Please enter a Short description</div>
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label for="imageFilename" class="form-label">Image Filename</label>
           <input
             type="text"
@@ -46,16 +47,17 @@
             name="listing[image][filename]"
             placeholder="Enter Image Filename"
           />
-        </div>
+        </div> -->
 
         <div class="mb-3">
-          <label for="imageUrl" class="form-label">Image URL</label>
+          <label for="imageUrl" class="form-label"
+            >Upload your Listing Image</label
+          >
           <input
-            type="text"
+            type="file"
             class="form-control"
             id="imageUrl"
-            name="listing[image][url]"
-            placeholder="Enter Image URL"
+            name="listing[image]"
           />
         </div>
 
