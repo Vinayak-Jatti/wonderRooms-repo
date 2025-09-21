@@ -42,7 +42,12 @@ module.exports.renderEditForm = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
   if (!listing) return res.status(404).send("Listing not found");
-  res.render("listings/edit.ejs", { listing });
+
+  let ogUrl = listing.image?.url || null;
+  if (ogUrl) {
+    ogUrl = ogUrl.replace("/upload", "/upload/h_300,w_250");
+  }
+  res.render("listings/edit.ejs", { listing, ogUrl });
 };
 
 // Update
@@ -57,7 +62,7 @@ module.exports.updateListing = async (req, res) => {
     let url = req.file.path;
     let filename = req.file.filename;
     listing.image = { url, filename };
-    await listing.save(); // ✅ Corrected
+    await listing.save();
   }
 
   req.flash("success", "✅ Listing updated successfully!");

@@ -43,9 +43,20 @@
           <div class="invalid-feedback">Please enter a short description.</div>
         </div>
 
-        <!-- Image URL -->
+        <!-- preview of old image -->
+        <p>old-image</p>
+        <div class="older-img">
+          <img
+            src="<%= ogUrl ? ogUrl : '/images/default.jpg' %>"
+            alt="Listing Image"
+          />
+        </div>
+
+        <!-- Image Upload -->
         <div class="mb-3">
-          <label for="imageUrl" class="form-label">Upload Your New Image</label>
+          <label for="imageUrl" class="form-label"
+            >Upload Your New Image Here!</label
+          >
           <input
             type="file"
             class="form-control"
