@@ -92,7 +92,7 @@ wrapAsync(async () => {
 })();
 
 // ===== Routes =====
-app.get("/wonderrooms-home", (req, res) => {
+app.get("/wonderrooms-home.onrender.com", (req, res) => {
   res.render("landing.ejs");
 });
 
