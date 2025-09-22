@@ -10,6 +10,7 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrspAsync");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 
@@ -22,7 +23,7 @@ const userRouter = require("./routes/auth.js");
 // ==== Connetions ====
 const app = express();
 const port = 3000;
-const MONGO_URL = "mongodb://127.0.0.1:27017/wonderlust";
+const dbUrl = process.env.ATLASDB_URL;
 
 // ===== App Config =====
 app.engine("ejs", ejsMate);
@@ -32,7 +33,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: "secretcode",
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+  console.log("Error in mongo-session-store", err);
+});
+
 const sessionOptions = {
+  store,
   secret: "secretcode",
   resave: false,
   saveUninitialized: true,
@@ -68,7 +82,7 @@ app.use((req, res, next) => {
 
 // ===== MongoDB Connection & Server Start =====
 wrapAsync(async () => {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
   console.log("Connected to DataBase : MongoDB");
 
   app.listen(port, () => {
