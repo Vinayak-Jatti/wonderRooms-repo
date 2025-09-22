@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "22.17.1"
+  },
   "name": "wonderrooms",
   "version": "1.0.0",
   "description": "��#\u0000 \u0000w\u0000o\u0000n\u0000d\u0000e\u0000r\u0000R\u0000o\u0000o\u0000m\u0000s\u0000-\u0000r\u0000e\u0000p\u0000o\u0000\r\u0000 \u0000",
