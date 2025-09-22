@@ -1,10 +1,119 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-  <h3 class="listing-title">All Listings</h3>
-  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+  <!-- Ribbon Section -->
+  <br />
+  <div class="ribbon-wrapper">
+    <!-- Scroll Left Button -->
+    <button class="scroll-btn scroll-left" id="scroll-left">&#9664;</button>
+
+    <!-- Ribbon Container -->
+    <div class="ribbon-container" id="ribbonContainer">
+      <!-- Ribbon Items -->
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-fire"></i>Trending
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-bed"></i>Rooms
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-city"></i>Iconic Cities
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-mountain"></i>Mountains
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-chess-rook"></i>Castles
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-swimming-pool"></i>Pools
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-campground"></i>Camping
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-tractor"></i>Farms
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-snowflake"></i>Arctic
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-igloo"></i>Domes
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-ship"></i>Boats
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-umbrella-beach"></i>Beach
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-tree"></i>Forest
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-hiking"></i>Hiking
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-skiing"></i>Skiing
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-hot-tub"></i>Hot Tubs
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-fish"></i>Fishing
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-wind"></i>Windy Spots
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-campfire"></i>Bonfires
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-moon"></i>Night Skies
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-leaf"></i>Nature
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-building"></i>Modern Stays
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-glass-cheers"></i>Party
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-paw"></i>Pet-Friendly
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-wine-glass-alt"></i>Vineyards
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-mountain-sun"></i>Scenic Views
+      </div>
+      <div class="ribbon-item" data-tooltip="Demo purpose">
+        <i class="fas fa-hotel"></i>Luxury
+      </div>
+    </div>
+
+    <!-- Scroll Right Button -->
+    <button class="scroll-btn scroll-right" id="scroll-right">&#9654;</button>
+
+    <!-- Right Section (Tax switch + Filter button) -->
+    <div class="right-section">
+      <div class="switch-container">
+        Display total after taxes
+        <label class="switch">
+          <input type="checkbox" id="taxSwitch" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <button class="filter-btn"><i class="fas fa-filter"></i> Filter</button>
+    </div>
+  </div>
+
+  <!-- Listings -->
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="listings">
     <% for (let listing of allListings) { %>
     <a href="/listings/<%= listing._id %>" class="listing-link">
-      <div class="card">
+      <div class="card listing" data-price="<%= listing.price || 0 %>">
         <img
           src="<%= listing.image && listing.image.url ? listing.image.url : '/images/default.jpg' %>"
           class="card-img-top"
@@ -14,8 +123,10 @@
         <div class="card-body">
           <p class="card-text">
             <b><%= listing.title %><br /></b>
-            &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") :
-            "N/A" %>/night
+            <span class="price"
+              >&#8377;<%= listing.price ? listing.price.toLocaleString("en-IN")
+              : "N/A" %></span
+            >/night
           </p>
         </div>
       </div>

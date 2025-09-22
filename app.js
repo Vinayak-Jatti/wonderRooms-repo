@@ -77,8 +77,8 @@ wrapAsync(async () => {
 })();
 
 // ===== Routes =====
-app.get("/", (req, res) => {
-  res.send("Hi, I am root!");
+app.get("/WonderRooms", (req, res) => {
+  res.render("landing.ejs");
 });
 
 app.use("/listings", listingsRouter);
