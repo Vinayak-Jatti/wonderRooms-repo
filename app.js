@@ -24,6 +24,7 @@ const userRouter = require("./routes/auth.js");
 const app = express();
 const port = 3000;
 const dbUrl = process.env.ATLASDB_URL;
+const s_key = process.env.SECRET;
 
 // ===== App Config =====
 app.engine("ejs", ejsMate);
@@ -36,7 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const store = MongoStore.create({
   mongoUrl: dbUrl,
   crypto: {
-    secret: "secretcode",
+    secret: s_key,
   },
   touchAfter: 24 * 3600,
 });
@@ -47,7 +48,7 @@ store.on("error", () => {
 
 const sessionOptions = {
   store,
-  secret: "secretcode",
+  secret: s_key,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -91,7 +92,7 @@ wrapAsync(async () => {
 })();
 
 // ===== Routes =====
-app.get("/WonderRooms", (req, res) => {
+app.get("/wonderrooms-home", (req, res) => {
   res.render("landing.ejs");
 });
 
