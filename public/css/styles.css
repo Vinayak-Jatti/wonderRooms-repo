@@ -332,3 +332,68 @@ input:checked + .slider:before {
   color: #000;
   background: #fe424ff0;
 }
+
+/* =========================
+   Mobile Adjustments (<576px)
+========================= */
+@media (max-width: 576px) {
+  /* Search Bar */
+  .search-bar {
+    flex-direction: column; /* stack vertically */
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .input-search {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .btn-search {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  /* Ribbon */
+  .ribbon-wrapper {
+    flex-direction: column; /* stack vertical */
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .ribbon-container {
+    flex-direction: column; /* vertical instead of horizontal scroll */
+    width: 100%;
+    gap: 8px;
+    overflow: visible; /* remove scroll */
+  }
+
+  .ribbon-item {
+    flex-direction: row; /* icon + label side by side */
+    justify-content: flex-start;
+    gap: 8px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .ribbon-item i {
+    font-size: 18px;
+  }
+
+  .right-section {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-btn,
+  .switch-container {
+    width: auto;
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
