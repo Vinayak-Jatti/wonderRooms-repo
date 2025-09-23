@@ -385,4 +385,7 @@ input:checked + .slider:before {
     font-size: 12px;
     padding: 4px 10px;
   }
+  .scroll-btn {
+    display: none !important;
+  }
 }
