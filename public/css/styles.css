@@ -24,7 +24,8 @@ body {
 
 .nav-link {
   color: #fe424d !important;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  text-decoration: none;
 }
 
 @media (max-width: 576px) {
