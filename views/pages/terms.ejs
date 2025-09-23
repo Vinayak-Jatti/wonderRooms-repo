@@ -1,272 +1,126 @@
 <% layout("/layouts/boilerplate") %>
 
-<style>
-  /* ---------------- Global ---------------- */
-  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+<div class="docs-tc">
+  <section class="doc-header">
+    <h1>Terms & Conditions</h1>
+    <p>Effective Date: 23 September 2025</p>
+    <p>
+      These Terms & Conditions ("Terms") govern your access to and use of the
+      WonderRooms website, mobile application, and related services
+      ("Services"). By accessing or using our Services, you agree to be bound by
+      these Terms.
+    </p>
+  </section>
 
-  body {
-    font-family: "Copperplate Gothic Light", "Cascadia Mono", "sans";
-    background: #e0e2e5; /* soft background for the "paper" look */
-    color: #1a1a1a;
-    margin: 0;
-    padding: 2rem 1rem;
-    line-height: 1.7;
-    display: flex;
-    justify-content: center;
-  }
+  <section class="doc-section">
+    <h2>1. Acceptance of Terms</h2>
+    <p>
+      By using WonderRooms Services, you acknowledge that you have read,
+      understood, and agreed to these Terms & Conditions. If you do not agree
+      with any part of these Terms, you must refrain from using our Services.
+    </p>
+    <p>
+      These Terms apply to all users, including visitors, registered users, and
+      contributors. Additional terms may apply to specific features or
+      promotions and will be presented at the time of use.
+    </p>
+  </section>
 
-  /* Main Document Wrapper */
-  main {
-    max-width: 900px;
-    background: #ffffff; /* paper background */
-    padding: 3rem 4rem;
-    border-radius: 12px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-    border-left: 6px solid #010215; /* stylish accent stripe */
-    position: relative;
-  }
+  <section class="doc-section">
+    <h2>2. Use of Services</h2>
+    <p>
+      You agree to use our Services only for lawful purposes and in accordance
+      with these Terms. You must not:
+    </p>
+    <ul>
+      <li>
+        Engage in any activity that disrupts or interferes with the
+        functionality of the website.
+      </li>
+      <li>
+        Attempt to gain unauthorized access to any part of the system or user
+        data.
+      </li>
+      <li>
+        Use the Services to transmit harmful, offensive, or illegal content.
+      </li>
+      <li>
+        Violate any applicable local, national, or international laws or
+        regulations.
+      </li>
+    </ul>
+    <p>
+      We reserve the right to suspend or terminate access to any user who
+      violates these conditions.
+    </p>
+  </section>
 
-  /* Accent Stripe Pseudo */
-  main::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 6px;
-    height: 100%;
-    background: linear-gradient(to bottom, #fe424d, #ff6f6f);
-    border-radius: 12px 0 0 12px;
-  }
+  <section class="doc-section">
+    <h2>3. Intellectual Property</h2>
+    <p>
+      All content on the WonderRooms platform—including but not limited to text,
+      images, graphics, logos, icons, audio clips, software, and code—is the
+      exclusive property of WonderRooms or its licensors and is protected under
+      applicable intellectual property laws.
+    </p>
+    <p>
+      You may not reproduce, distribute, modify, or publicly display any content
+      without prior written consent from WonderRooms. Unauthorized use may
+      result in legal action.
+    </p>
+  </section>
 
-  /* Document Header */
-  .doc-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
+  <section class="doc-section">
+    <h2>4. Limitation of Liability</h2>
+    <p>
+      WonderRooms shall not be held liable for any direct, indirect, incidental,
+      special, or consequential damages resulting from:
+    </p>
+    <ul>
+      <li>Your use or inability to use the Services.</li>
+      <li>Unauthorized access to or alteration of your data.</li>
+      <li>Any third-party content or conduct.</li>
+    </ul>
+    <p>
+      Our Services are provided "as is" without warranties of any kind, express
+      or implied.
+    </p>
+  </section>
 
-  .doc-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #040429;
-    margin-bottom: 0.3rem;
-    letter-spacing: 1px;
-  }
+  <section class="doc-section">
+    <h2>5. Modifications</h2>
+    <p>
+      We may update these Terms & Conditions periodically to reflect changes in
+      our Services, legal requirements, or business practices. Any modifications
+      will be posted on this page with an updated effective date.
+    </p>
+    <p>
+      Continued use of the Services after changes are posted constitutes your
+      acceptance of the revised Terms.
+    </p>
+  </section>
 
-  .doc-header p {
-    font-size: 1rem;
-    color: #555;
-    font-weight: 500;
-  }
+  <section class="doc-section">
+    <h2>6. Governing Law</h2>
+    <p>
+      These Terms shall be governed by and construed in accordance with the laws
+      of India. Any disputes arising under or in connection with these Terms
+      shall be subject to the exclusive jurisdiction of the courts located in
+      Bangalore, Karnataka.
+    </p>
+  </section>
 
-  /* Document Sections */
-  .doc-section {
-    margin-bottom: 2.5rem;
-  }
-
-  .doc-section h2 {
-    font-size: 1.8rem;
-    color: #000000;
-    border-bottom: 2px solid #272626;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-
-  .doc-section p,
-  .doc-section ul {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 1rem;
-  }
-
-  .doc-section ul {
-    list-style-type: disc;
-    margin-left: 1.5rem;
-  }
-
-  /* Links */
-  a {
-    color: #fe424d;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  a:hover {
-    color: #ff6f6f;
-    text-decoration: underline;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 2rem 0;
-    color: #777;
-    font-size: 0.9rem;
-    border-top: 1px solid #ddd;
-    margin-top: 3rem;
-  }
-
-  /* ---------------- Modern UI Touches ---------------- */
-
-  /* Section Hover Highlight */
-  .doc-section:hover {
-    background: #c0bebe54;
-    transition: background 0.5s ease;
-    border-left: 4px solid #01002c;
-    padding-left: 3.5rem;
-  }
-
-  /* Subtle drop shadow for paragraphs */
-  .doc-section p {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    main {
-      padding: 2rem 2rem;
-      border-left: none;
-      border-radius: 12px;
-    }
-
-    main::before {
-      display: none;
-    }
-
-    .doc-header h1 {
-      font-size: 2.2rem;
-    }
-
-    .doc-section h2 {
-      font-size: 1.5rem;
-    }
-  }
-</style>
-<body>
-  <main>
-    <section class="doc-header">
-      <h1>Terms & Conditions</h1>
-      <p>Effective Date: 23 September 2025</p>
-      <p>
-        These Terms & Conditions ("Terms") govern your access to and use of the
-        WonderRooms website, mobile application, and related services
-        ("Services"). By accessing or using our Services, you agree to be bound
-        by these Terms.
-      </p>
-    </section>
-
-    <section class="doc-section">
-      <h2>1. Acceptance of Terms</h2>
-      <p>
-        By using WonderRooms Services, you acknowledge that you have read,
-        understood, and agreed to these Terms & Conditions. If you do not agree
-        with any part of these Terms, you must refrain from using our Services.
-      </p>
-      <p>
-        These Terms apply to all users, including visitors, registered users,
-        and contributors. Additional terms may apply to specific features or
-        promotions and will be presented at the time of use.
-      </p>
-    </section>
-
-    <section class="doc-section">
-      <h2>2. Use of Services</h2>
-      <p>
-        You agree to use our Services only for lawful purposes and in accordance
-        with these Terms. You must not:
-      </p>
-      <ul>
-        <li>
-          Engage in any activity that disrupts or interferes with the
-          functionality of the website.
-        </li>
-        <li>
-          Attempt to gain unauthorized access to any part of the system or user
-          data.
-        </li>
-        <li>
-          Use the Services to transmit harmful, offensive, or illegal content.
-        </li>
-        <li>
-          Violate any applicable local, national, or international laws or
-          regulations.
-        </li>
-      </ul>
-      <p>
-        We reserve the right to suspend or terminate access to any user who
-        violates these conditions.
-      </p>
-    </section>
-
-    <section class="doc-section">
-      <h2>3. Intellectual Property</h2>
-      <p>
-        All content on the WonderRooms platform—including but not limited to
-        text, images, graphics, logos, icons, audio clips, software, and code—is
-        the exclusive property of WonderRooms or its licensors and is protected
-        under applicable intellectual property laws.
-      </p>
-      <p>
-        You may not reproduce, distribute, modify, or publicly display any
-        content without prior written consent from WonderRooms. Unauthorized use
-        may result in legal action.
-      </p>
-    </section>
-
-    <section class="doc-section">
-      <h2>4. Limitation of Liability</h2>
-      <p>
-        WonderRooms shall not be held liable for any direct, indirect,
-        incidental, special, or consequential damages resulting from:
-      </p>
-      <ul>
-        <li>Your use or inability to use the Services.</li>
-        <li>Unauthorized access to or alteration of your data.</li>
-        <li>Any third-party content or conduct.</li>
-      </ul>
-      <p>
-        Our Services are provided "as is" without warranties of any kind,
-        express or implied.
-      </p>
-    </section>
-
-    <section class="doc-section">
-      <h2>5. Modifications</h2>
-      <p>
-        We may update these Terms & Conditions periodically to reflect changes
-        in our Services, legal requirements, or business practices. Any
-        modifications will be posted on this page with an updated effective
-        date.
-      </p>
-      <p>
-        Continued use of the Services after changes are posted constitutes your
-        acceptance of the revised Terms.
-      </p>
-    </section>
-
-    <section class="doc-section">
-      <h2>6. Governing Law</h2>
-      <p>
-        These Terms shall be governed by and construed in accordance with the
-        laws of India. Any disputes arising under or in connection with these
-        Terms shall be subject to the exclusive jurisdiction of the courts
-        located in Bangalore, Karnataka.
-      </p>
-    </section>
-
-    <section class="doc-section">
-      <h2>7. Contact Information</h2>
-      <p>
-        If you have any questions or concerns regarding these Terms &
-        Conditions, please contact us:
-      </p>
-      <p>
-        Email:
-        <a href="mailto:support@wonderrooms.com">support@wonderrooms.com</a>
-      </p>
-      <p>Phone: +91-123-456-7890</p>
-      <p>Address: vijayapura-586205, Karnataka, India</p>
-    </section>
-  </main>
-</body>
+  <section class="doc-section">
+    <h2>7. Contact Information</h2>
+    <p>
+      If you have any questions or concerns regarding these Terms & Conditions,
+      please contact us:
+    </p>
+    <p>
+      Email:
+      <a href="mailto:support@wonderrooms.com">support@wonderrooms.com</a>
+    </p>
+    <p>Phone: +91-123-456-7890</p>
+    <p>Address: vijayapura-586205, Karnataka, India</p>
+  </section>
+</div>
