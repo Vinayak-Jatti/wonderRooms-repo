@@ -67,6 +67,8 @@ body {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 10px;
+  text-decoration: none;
 }
 
 .f-info-socials i {
