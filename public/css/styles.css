@@ -337,50 +337,39 @@ input:checked + .slider:before {
    Mobile Adjustments (<576px)
 ========================= */
 @media (max-width: 576px) {
-  /* Search Bar */
-  .search-bar {
-    flex-direction: column; /* stack vertically */
-    width: 100%;
-    gap: 0.5rem;
-  }
-
-  .input-search {
-    width: 100%;
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
-  }
-
-  .btn-search {
-    width: 100%;
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
-  }
-
   /* Ribbon */
   .ribbon-wrapper {
-    flex-direction: column; /* stack vertical */
+    flex-direction: column;
     align-items: flex-start;
     gap: 8px;
     width: 100%;
   }
 
   .ribbon-container {
-    flex-direction: column; /* vertical instead of horizontal scroll */
+    flex-direction: row; /* stay horizontal */
+    overflow-x: auto; /* allow scroll */
+    overflow-y: hidden;
+    gap: 12px;
     width: 100%;
-    gap: 8px;
-    overflow: visible; /* remove scroll */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; /* smooth on mobile */
+    scrollbar-width: none; /* Firefox hide */
+  }
+  .ribbon-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari hide */
   }
 
   .ribbon-item {
-    flex-direction: row; /* icon + label side by side */
-    justify-content: flex-start;
-    gap: 8px;
-    width: 100%;
-    font-size: 0.9rem;
+    flex-direction: column; /* icon on top, label below (Airbnb style) */
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    min-width: 70px; /* keep consistent size */
   }
 
   .ribbon-item i {
-    font-size: 18px;
+    font-size: 20px;
+    margin-bottom: 4px;
   }
 
   .right-section {
