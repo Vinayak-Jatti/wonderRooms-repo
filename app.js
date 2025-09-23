@@ -92,13 +92,21 @@ wrapAsync(async () => {
 })();
 
 // ===== Routes =====
-app.get("/wonderrooms-home.onrender.com", (req, res) => {
-  res.render("landing.ejs");
+app.get("/", (req, res) => {
+  res.redirect("https://wonderrooms-home.onrender.com");
 });
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
+
+app.get("/privacy", (req, res) => {
+  res.render("pages/police");
+});
+
+app.get("/terms", (req, res) => {
+  res.render("pages/terms");
+});
 
 //Custom error:
 app.get("/test-error", (req, res) => {

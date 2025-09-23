@@ -1,0 +1,295 @@
+ <% layout("/layouts/boilerplate") %>
+
+  <style>
+    /* ---------------- Global ---------------- */
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+    body {
+      font-family: "Copperplate Gothic Light", "Cascadia Mono", "sans";
+      background: #e0e2e5; /* soft background for the "paper" look */
+      color: #1a1a1a;
+      margin: 0;
+      padding: 2rem 1rem;
+      line-height: 1.7;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Main Document Wrapper */
+    main {
+      max-width: 900px;
+      background: #ffffff; /* paper background */
+      padding: 3rem 4rem;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      border-left: 6px solid #010215; /* stylish accent stripe */
+      position: relative;
+    }
+
+    /* Accent Stripe Pseudo */
+    main::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, #fe424d, #ff6f6f);
+      border-radius: 12px 0 0 12px;
+    }
+
+    /* Document Header */
+    .doc-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .doc-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #040429;
+      margin-bottom: 0.3rem;
+      letter-spacing: 1px;
+    }
+
+    .doc-header p {
+      font-size: 1rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    /* Document Sections */
+    .doc-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .doc-section h2 {
+      font-size: 1.8rem;
+      color: #000000;
+      border-bottom: 2px solid #272626;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .doc-section p,
+    .doc-section ul {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .doc-section ul {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+    }
+
+    /* Links */
+    a {
+      color: #fe424d;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: #ff6f6f;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: #777;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+      margin-top: 3rem;
+    }
+
+    /* ---------------- Modern UI Touches ---------------- */
+
+    /* Section Hover Highlight */
+    .doc-section:hover {
+      background: #c0bebe54;
+      transition: background 0.5s ease;
+      border-left: 4px solid #01002c;
+      padding-left: 3.5rem;
+    }
+
+    /* Subtle drop shadow for paragraphs */
+    .doc-section p {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      main {
+        padding: 2rem 2rem;
+        border-left: none;
+        border-radius: 12px;
+      }
+
+      main::before {
+        display: none;
+      }
+
+      .doc-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .doc-section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+  <body>
+    <main>
+      <section class="doc-header">
+        <h1>Privacy Policy</h1>
+        <p>Effective Date: 23 September 2025</p>
+        <p>
+          This Privacy Policy outlines how WonderRooms ("we", "our", or "us")
+          collects, uses, discloses, and protects your personal information when
+          you access our website or use our services. We are committed to
+          maintaining the confidentiality and integrity of your data in
+          accordance with applicable laws and best practices.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>1. Introduction</h2>
+        <p>
+          Your privacy is important to us. This policy explains what data we
+          collect, why we collect it, how we use it, and the choices you have
+          regarding your information. By using our services, you consent to the
+          practices described in this policy.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>2. Information We Collect</h2>
+        <ul>
+          <li>
+            <strong>Personal Information:</strong> Includes your name, email
+            address, phone number, and other contact details provided during
+            registration or communication.
+          </li>
+          <li>
+            <strong>Usage Information:</strong> Data about how you interact with
+            our website and services, such as pages visited, time spent, and
+            navigation patterns.
+          </li>
+          <li>
+            <strong>Device & Technical Data:</strong> Information like IP
+            address, browser type, operating system, and device identifiers used
+            to access our services.
+          </li>
+          <li>
+            <strong>Cookies & Tracking:</strong> Technologies that help us
+            understand user behavior, improve performance, and deliver
+            personalized experiences. These may include session cookies,
+            persistent cookies, and third-party analytics tools.
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>3. Use of Information</h2>
+        <p>We use the information we collect for the following purposes:</p>
+        <ul>
+          <li>To operate, maintain, and improve our services and website.</li>
+          <li>To personalize content and enhance user experience.</li>
+          <li>
+            To respond to inquiries, provide customer support, and send
+            service-related communications.
+          </li>
+          <li>
+            To comply with legal obligations and enforce our terms and policies.
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>4. Data Sharing and Disclosure</h2>
+        <p>
+          We do not sell your personal information. We may share your data with:
+        </p>
+        <ul>
+          <li>
+            Trusted third-party service providers who assist in hosting,
+            analytics, and customer support.
+          </li>
+          <li>
+            Legal authorities when required by law, regulation, or court order.
+          </li>
+          <li>
+            Business partners, only with your explicit consent and for clearly
+            defined purposes.
+          </li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>5. Legal Compliance</h2>
+        <p>
+          Our data practices comply with applicable laws including the
+          Information Technology Act (India), the General Data Protection
+          Regulation (GDPR) for EU users, and other relevant privacy
+          regulations. We strive to uphold transparency, accountability, and
+          user rights.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>6. Cookies and Tracking</h2>
+        <p>
+          We use cookies to enhance website performance, remember user
+          preferences, and analyze traffic. You can control cookie settings
+          through your browser. For more details, refer to our
+          <a href="/cookie-policy">Cookie Policy</a>.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>7. User Rights</h2>
+        <p>Depending on your jurisdiction, you may have the right to:</p>
+        <ul>
+          <li>Access and review the personal data we hold about you.</li>
+          <li>
+            Request correction or deletion of inaccurate or outdated data.
+          </li>
+          <li>Withdraw consent for data processing where applicable.</li>
+          <li>Request data portability in a structured format.</li>
+          <li>Object to certain types of processing or profiling.</li>
+          <li>File a complaint with a data protection authority.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section">
+        <h2>8. Security Measures</h2>
+        <p>
+          We implement robust security protocols including encryption, access
+          controls, and secure servers to protect your data from unauthorized
+          access, alteration, or loss. However, no method of transmission over
+          the internet is 100% secure, and we encourage users to take
+          precautions when sharing sensitive information.
+        </p>
+      </section>
+
+      <section class="doc-section">
+        <h2>9. Contact Information</h2>
+        <p>
+          If you have questions, concerns, or requests related to this Privacy
+          Policy, please contact us:
+        </p>
+        <p>
+          Email:
+          <a href="mailto:privacy@wonderrooms.com">privacy@wonderrooms.com</a>
+        </p>
+        <p>Phone: +91-123-456-7890</p>
+        <p>Address: Vijayapura-586205, Karnataka, India</p>
+      </section>
+    </main>
+  </body>
+</html>
