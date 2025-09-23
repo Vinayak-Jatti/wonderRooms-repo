@@ -406,4 +406,9 @@ input:checked + .slider:before {
     font-size: 12px;
     padding: 4px 10px;
   }
+
+  .scroll-left,
+  .scroll-right {
+    display: none;
+  }
 }
