@@ -12,6 +12,7 @@
   line-height: 1.7;
   /* display: flex; */
   justify-content: center;
+  border-radius: 20px;
 }
 
 main {
