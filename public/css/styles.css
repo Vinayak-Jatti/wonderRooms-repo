@@ -90,6 +90,12 @@ body {
   margin-bottom: 2rem !important;
 }
 
+.show-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card-img-top {
   border-radius: 1rem !important;
   width: 100% !important;
@@ -129,9 +135,9 @@ body {
 }
 
 /* Show Page */
-.show-img {
+/* .show-img {
   height: 30vh;
-}
+} */
 
 .older-img {
   position: relative;
