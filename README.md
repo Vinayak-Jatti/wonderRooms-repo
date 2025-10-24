@@ -120,7 +120,7 @@ npm install
 node app.js
 ```
 
-Visit 👉 **[(https://wonderrooms-home.onrender.com/listings)]** in your browser.
+Visit 👉 **[ Live on Render ](https://wonderrooms-home.onrender.com/listings)** in your browser.
 
 ---
 
@@ -181,17 +181,9 @@ Visit 👉 **[(https://wonderrooms-home.onrender.com/listings)]** in your browse
 ## 👨‍💻 Author
 
 **👋 Vinayak Jatti**
-📧 [vinayakjatti044@gmail.com](mailto:vinayakjatti044@gmail.com)
+📧 [Email](mailto:vinayakjatti044@gmail.com)
 💼 [LinkedIn](https://linkedin.com/in/vinayak-jatti) *(add once ready)*
 💻 Passionate Full-Stack Developer | Building useful real-world projects
 
 ---
-
- 
-
----
-
-> “A comfortable home shouldn’t be a luxury — it should be accessible to every student.”
- *WonderRooms Team*
-
  
