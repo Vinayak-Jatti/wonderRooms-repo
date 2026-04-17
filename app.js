@@ -13,56 +13,54 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
+const passport = require("passport");
 
-// Routers
 const listingsRouter = require("./routes/listings.js");
 const reviewsRouter = require("./routes/reviews.js");
-const passport = require("passport");
 const userRouter = require("./routes/auth.js");
 
-// ==== Connetions ====
 const app = express();
-const port = 3000;
-const dbUrl = process.env.ATLASDB_URL;
-const s_key = process.env.SECRET;
+const PORT = process.env.PORT || 3000;
+const DB_URL = process.env.ATLASDB_URL;
+const SESSION_SECRET = process.env.SECRET;
 
-// ===== App Config =====
+/* ========== App Configuration ========== */
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+/* ========== Session Store ========== */
 const store = MongoStore.create({
-  mongoUrl: dbUrl,
-  crypto: {
-    secret: s_key,
-  },
+  mongoUrl: DB_URL,
+  crypto: { secret: SESSION_SECRET },
   touchAfter: 24 * 3600,
 });
 
-store.on("error", () => {
-  console.log("Error in mongo-session-store", err);
+store.on("error", (err) => {
+  console.error("Session store error:", err);
 });
 
 const sessionOptions = {
   store,
-  secret: s_key,
+  secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
   },
 };
 
-// ======== Passport ===========
+/* ========== Auth Middleware ========== */
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
-
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -81,17 +79,26 @@ app.use((req, res, next) => {
   next();
 });
 
-// ===== MongoDB Connection & Server Start =====
-wrapAsync(async () => {
-  await mongoose.connect(dbUrl);
-  console.log("Connected to DataBase : MongoDB");
+/* ========== Database Connection ========== */
+const connectDB = async () => {
+  try {
+    await mongoose.connect(DB_URL);
+    console.log("Connected to Database: MongoDB");
+  } catch (connectionError) {
+    console.error("MongoDB connection failed:", connectionError.message);
+    process.exit(1);
+  }
+};
 
-  app.listen(port, () => {
-    console.log(`Server started on http://localhost:${port}`);
-  });
-})();
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB runtime error:", err.message);
+});
 
-// ===== Routes =====
+mongoose.connection.on("disconnected", () => {
+  console.warn("MongoDB disconnected. Attempting reconnection...");
+});
+
+/* ========== Routes ========== */
 app.get("/", (req, res) => {
   res.redirect("https://wonderrooms-home.onrender.com");
 });
@@ -108,18 +115,48 @@ app.get("/terms", (req, res) => {
   res.render("pages/terms");
 });
 
-//Custom error:
-app.get("/test-error", (req, res) => {
-  throw new Error("This is a test error!");
-});
-
-// Error Handler
+/* ========== 404 Catch-All ========== */
 app.all(/(.*)/, (req, res, next) => {
   next(new ExpressError("Page Not Found!", 404));
 });
 
+/* ========== Global Error Handler ========== */
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = "Something went wrong!";
+
+  if (process.env.NODE_ENV !== "production") {
+    console.error(`[${statusCode}] ${err.message}`);
+  }
+
   res.status(statusCode).render("error.ejs", { err });
+});
+
+/* ========== Graceful Shutdown ========== */
+const gracefulShutdown = (signal) => {
+  console.log(`\n${signal} received. Shutting down gracefully...`);
+  mongoose.connection.close(false).then(() => {
+    console.log("MongoDB connection closed.");
+    process.exit(0);
+  });
+};
+
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err.message);
+  gracefulShutdown("UNCAUGHT_EXCEPTION");
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("Unhandled Rejection:", reason);
+  gracefulShutdown("UNHANDLED_REJECTION");
+});
+
+/* ========== Start Server ========== */
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
+  });
 });
