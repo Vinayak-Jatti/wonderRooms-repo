@@ -1,29 +1,45 @@
 const Listing = require("../models/listing");
 
-// Index - All Listings
+const ITEMS_PER_PAGE = 12;
+
 module.exports.index = async (req, res) => {
   const { q } = req.query;
-  let query = {};
+  const currentPage = Math.max(1, parseInt(req.query.page, 10) || 1);
+
+  let filter = {};
   if (q) {
-    const regex = new RegExp(q, "i"); // Case-insensitive exact or partial match
-    query = {
+    const regex = new RegExp(q, "i");
+    filter = {
       $or: [
         { title: regex },
         { location: regex },
-        { country: regex }
-      ]
+        { country: regex },
+      ],
     };
   }
-  const allListings = await Listing.find(query);
-  res.render("listings/index", { allListings, searchQuery: q });
+
+  const totalListings = await Listing.countDocuments(filter);
+  const totalPages = Math.max(1, Math.ceil(totalListings / ITEMS_PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+
+  const allListings = await Listing.find(filter)
+    .skip((safePage - 1) * ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE)
+    .sort({ _id: -1 });
+
+  res.render("listings/index", {
+    allListings,
+    searchQuery: q,
+    currentPage: safePage,
+    totalPages,
+    totalListings,
+  });
 };
 
-// New Form
 module.exports.renderNewForm = (req, res) => {
   res.render("listings/new.ejs");
 };
 
-// Show - Single Listing
 module.exports.showListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id)
@@ -33,10 +49,14 @@ module.exports.showListing = async (req, res) => {
     })
     .populate("owner");
 
+  if (!listing) {
+    req.flash("error", "Listing not found!");
+    return res.redirect("/listings");
+  }
+
   res.render("listings/show.ejs", { listing });
 };
 
-// Create - Add Listing
 module.exports.createListing = async (req, res) => {
   let url = req.file.path;
   let filename = req.file.filename;
@@ -49,11 +69,14 @@ module.exports.createListing = async (req, res) => {
   res.redirect("/listings");
 };
 
-// Edit Form
 module.exports.renderEditForm = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
-  if (!listing) return res.status(404).send("Listing not found");
+
+  if (!listing) {
+    req.flash("error", "Listing not found!");
+    return res.redirect("/listings");
+  }
 
   let ogUrl = listing.image?.url || null;
   if (ogUrl) {
@@ -62,7 +85,6 @@ module.exports.renderEditForm = async (req, res) => {
   res.render("listings/edit.ejs", { listing, ogUrl });
 };
 
-// Update
 module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
   let listing = await Listing.findByIdAndUpdate(
@@ -77,13 +99,13 @@ module.exports.updateListing = async (req, res) => {
     await listing.save();
   }
 
-  req.flash("success", "✅ Listing updated successfully!");
+  req.flash("success", "Listing updated successfully!");
   res.redirect(`/listings/${id}`);
 };
 
-// Delete
 module.exports.deleteListing = async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndDelete(id);
+  req.flash("success", "Listing deleted successfully!");
   res.redirect("/listings");
 };

@@ -1,122 +1,133 @@
 <% layout("/layouts/boilerplate") %>
-<div class="row">
-  <div class="col-8 offset-2">
-    <div class="container my-5">
-      <h3 class="mb-4">Edit your listing</h3>
-      <form
-        method="POST"
-        action="/listings/<%= listing._id %>?_method=PUT"
-        class="needs-validation"
-        enctype="multipart/form-data"
-        novalidate
-      >
-        <!-- Title -->
-        <div class="mb-3">
-          <label for="title" class="form-label">
-            Title <span class="text-danger">*</span>
-          </label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            name="listing[title]"
-            value="<%= listing.title %>"
-            placeholder="Enter Title"
-            required
-          />
-          <div class="invalid-feedback">Please enter a title.</div>
+
+<section class="clay-form-page">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-7">
+      <div class="clay-card">
+        <div class="clay-card-header">
+          <h3 class="clay-card-title">
+            <i class="fa-solid fa-pen-to-square me-2"></i>Edit Listing
+          </h3>
+          <p class="text-muted mb-0 small">Update your listing details below</p>
         </div>
 
-        <!-- Description -->
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <textarea
-            id="description"
-            name="listing[description]"
-            rows="4"
-            placeholder="Enter Description"
-            class="form-control"
-            required
-          >
-<%= listing.description %></textarea
-          >
-          <div class="invalid-feedback">Please enter a short description.</div>
-        </div>
-
-        <!-- preview of old image -->
-        <p>old-image</p>
-        <div class="older-img">
-          <img
-            src="<%= ogUrl ? ogUrl : '/images/default.jpg' %>"
-            alt="Listing Image"
-          />
-        </div>
-
-        <!-- Image Upload -->
-        <div class="mb-3">
-          <label for="imageUrl" class="form-label"
-            >Upload Your New Image Here!</label
-          >
-          <input
-            type="file"
-            class="form-control"
-            id="imageUrl"
-            name="listing[image]"
-            placeholder="Please Select Your File"
-          />
-        </div>
-
-        <!-- Price & Country -->
-        <div class="row">
-          <div class="mb-3 col-md-4">
-            <label for="price" class="form-label">Price</label>
-            <input
-              type="number"
-              class="form-control"
-              id="price"
-              name="listing[price]"
-              value="<%= listing.price %>"
-              placeholder="Enter Price"
-              required
-            />
-            <div class="invalid-feedback">Please enter a price.</div>
-          </div>
-
-          <div class="mb-3 col-md-8">
-            <label for="country" class="form-label">Country</label>
+        <form
+          method="POST"
+          action="/listings/<%= listing._id %>?_method=PUT"
+          class="needs-validation"
+          enctype="multipart/form-data"
+          novalidate
+        >
+          <div class="clay-form-group">
+            <label for="title" class="clay-label">
+              Title <span class="text-danger">*</span>
+            </label>
             <input
               type="text"
-              class="form-control"
-              id="country"
-              name="listing[country]"
-              value="<%= listing.country %>"
-              placeholder="Enter Country"
+              class="form-control clay-input"
+              id="title"
+              name="listing[title]"
+              value="<%= listing.title %>"
+              placeholder="Enter Title"
               required
             />
-            <div class="invalid-feedback">Please enter a country.</div>
+            <div class="invalid-feedback">Please enter a title.</div>
           </div>
-        </div>
 
-        <!-- Location -->
-        <div class="mb-3">
-          <label for="location" class="form-label">Location</label>
-          <input
-            type="text"
-            class="form-control"
-            id="location"
-            name="listing[location]"
-            value="<%= listing.location %>"
-            placeholder="Enter Location"
-            required
-          />
-          <div class="invalid-feedback">Please enter a location.</div>
-        </div>
+          <div class="clay-form-group">
+            <label for="description" class="clay-label">Description</label>
+            <textarea
+              id="description"
+              name="listing[description]"
+              rows="4"
+              placeholder="Enter Description"
+              class="form-control clay-input"
+              required
+            ><%= listing.description %></textarea>
+            <div class="invalid-feedback">Please enter a description.</div>
+          </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
-      </form>
+          <% if (ogUrl) { %>
+          <div class="clay-form-group">
+            <label class="clay-label">Current Image</label>
+            <div class="clay-image-preview">
+              <img
+                src="<%= ogUrl %>"
+                alt="Current listing image"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';"
+              />
+            </div>
+          </div>
+          <% } %>
+
+          <div class="clay-form-group">
+            <label for="imageUrl" class="clay-label">
+              <i class="fa-solid fa-cloud-arrow-up me-1"></i>Upload New Image
+            </label>
+            <input
+              type="file"
+              class="form-control clay-input"
+              id="imageUrl"
+              name="listing[image]"
+              accept="image/*"
+            />
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="clay-form-group">
+                <label for="price" class="clay-label">Price (₹/night)</label>
+                <input
+                  type="number"
+                  class="form-control clay-input"
+                  id="price"
+                  name="listing[price]"
+                  value="<%= listing.price %>"
+                  placeholder="Enter Price"
+                  min="1"
+                  required
+                />
+                <div class="invalid-feedback">Please enter a price.</div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="clay-form-group">
+                <label for="country" class="clay-label">Country</label>
+                <input
+                  type="text"
+                  class="form-control clay-input"
+                  id="country"
+                  name="listing[country]"
+                  value="<%= listing.country %>"
+                  placeholder="Enter Country"
+                  required
+                />
+                <div class="invalid-feedback">Please enter a country.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="clay-form-group">
+            <label for="location" class="clay-label">
+              <i class="fa-solid fa-location-dot me-1"></i>Location
+            </label>
+            <input
+              type="text"
+              class="form-control clay-input"
+              id="location"
+              name="listing[location]"
+              value="<%= listing.location %>"
+              placeholder="Enter Location"
+              required
+            />
+            <div class="invalid-feedback">Please enter a location.</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary clay-submit-btn w-100">
+            <i class="fa-solid fa-check me-2"></i>Update Listing
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- JS for form validation -->
-<script src="/js/edit.js"></script>
+</section>

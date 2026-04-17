@@ -1,6 +1,75 @@
 (() => {
   "use strict";
 
+  /* ========== Dark Mode Logic ========== */
+  const themeToggles = document.querySelectorAll(".theme-toggle-btn");
+  const body = document.body;
+  const currentTheme = localStorage.getItem("theme");
+
+  if (currentTheme === "dark") {
+    body.classList.add("dark-mode");
+    themeToggles.forEach(t => t.innerHTML = '<i class="fa-solid fa-sun text-warning"></i>');
+  }
+
+  themeToggles.forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      const isDark = body.classList.contains("dark-mode");
+      
+      if (isDark) {
+        localStorage.setItem("theme", "dark");
+        themeToggles.forEach(t => t.innerHTML = '<i class="fa-solid fa-sun text-warning"></i>');
+      } else {
+        localStorage.setItem("theme", "light");
+        themeToggles.forEach(t => t.innerHTML = '<i class="fa-solid fa-moon"></i>');
+      }
+    });
+  });
+
+  /* ========== Image Blur-Up Observer ========== */
+  const blurImages = document.querySelectorAll(".blur-up");
+  blurImages.forEach(img => {
+    if (img.complete) {
+      img.classList.add("loaded");
+    } else {
+      img.addEventListener("load", () => {
+        img.classList.add("loaded");
+      });
+    }
+  });
+
+  /* ========== Wishlist Heart Toggle ========== */
+  const heartBtns = document.querySelectorAll(".heart-btn");
+  let savedFavorites = [];
+  try {
+    savedFavorites = JSON.parse(localStorage.getItem("wishlist")) || [];
+  } catch (e) {
+    savedFavorites = [];
+  }
+
+  heartBtns.forEach(btn => {
+    const id = btn.getAttribute("data-id");
+    if (savedFavorites.includes(id)) {
+      btn.classList.add("active");
+    }
+
+    btn.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const listingId = this.getAttribute("data-id");
+      
+      this.classList.toggle("active");
+      
+      let favorites = JSON.parse(localStorage.getItem("wishlist")) || [];
+      if (this.classList.contains("active")) {
+        if (!favorites.includes(listingId)) favorites.push(listingId);
+      } else {
+        favorites = favorites.filter(favId => favId !== listingId);
+      }
+      localStorage.setItem("wishlist", JSON.stringify(favorites));
+    });
+  });
+
   /* ========== Bootstrap Form Validation ========== */
   const forms = document.querySelectorAll(".needs-validation");
   Array.from(forms).forEach((form) => {

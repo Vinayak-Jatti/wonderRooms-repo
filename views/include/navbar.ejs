@@ -5,17 +5,22 @@
       <span class="brand-text">WonderRooms</span>
     </a>
 
-    <button
-      class="navbar-toggler custom-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-      aria-controls="navbarContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="d-flex align-items-center gap-2 d-lg-none">
+      <button class="theme-toggle-btn" id="mobileThemeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button
+        class="navbar-toggler custom-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
 
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav mx-auto my-2 my-lg-0">
@@ -27,7 +32,7 @@
                 class="form-control input-search"
                 type="search"
                 name="q"
-                placeholder="Search destinations, countries..."
+                placeholder="Search destinations..."
                 aria-label="Search"
                 autocomplete="off"
               />
@@ -40,6 +45,12 @@
       </ul>
 
       <ul class="navbar-nav ms-auto align-items-center gap-2 gap-lg-3">
+        <li class="nav-item d-none d-lg-block">
+          <button class="theme-toggle-btn" id="desktopThemeToggle" aria-label="Toggle dark mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link add-room-btn fw-semibold" href="/listings/new">
             <i class="fa-solid fa-plus me-1"></i> Add Your Room

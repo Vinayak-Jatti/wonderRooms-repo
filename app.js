@@ -14,6 +14,9 @@ const MongoStore = require("connect-mongo");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const passport = require("passport");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
+const compression = require("compression");
 
 const listingsRouter = require("./routes/listings.js");
 const reviewsRouter = require("./routes/reviews.js");
@@ -23,6 +26,24 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.ATLASDB_URL;
 const SESSION_SECRET = process.env.SECRET;
+
+/* ========== Security ========== */
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
+      styleSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdnjs.cloudflare.com", "fonts.googleapis.com"],
+      fontSrc: ["'self'", "fonts.gstatic.com", "cdnjs.cloudflare.com", "cdn.jsdelivr.net"],
+      imgSrc: ["'self'", "data:", "blob:", "*.unsplash.com", "images.unsplash.com", "res.cloudinary.com"],
+      connectSrc: ["'self'"],
+    },
+  },
+  crossOriginEmbedderPolicy: false,
+}));
+
+app.use(mongoSanitize({ replaceWith: "_" }));
+app.use(compression());
 
 /* ========== App Configuration ========== */
 app.engine("ejs", ejsMate);
@@ -100,7 +121,7 @@ mongoose.connection.on("disconnected", () => {
 
 /* ========== Routes ========== */
 app.get("/", (req, res) => {
-  res.redirect("https://wonderrooms-home.onrender.com");
+  res.render("landing");
 });
 
 app.use("/listings", listingsRouter);
