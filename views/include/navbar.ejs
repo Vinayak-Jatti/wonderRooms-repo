@@ -57,7 +57,7 @@
           </a>
         </li>
 
-        <% if(!currUser) { %>
+        <% if(!locals.currUser) { %>
           <li class="nav-item">
             <a class="nav-link auth-link fw-bold" href="/signup">Sign Up</a>
           </li>
@@ -68,7 +68,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle user-profile-link fw-bold d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-circle-user fs-4"></i>
-              <span class="d-none d-lg-inline"><%= currUser.username || 'Account' %></span>
+              <span class="d-none d-lg-inline"><%= locals.currUser.username || 'Account' %></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end custom-dropdown shadow-lg" aria-labelledby="userDropdown">
               <li>

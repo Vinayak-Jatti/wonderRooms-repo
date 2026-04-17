@@ -29,7 +29,7 @@
     </p>
   </div>
 
-  <% if (currUser && listing.owner && currUser._id.toString() ===
+  <% if (locals.currUser && listing.owner && locals.currUser._id.toString() ===
   listing.owner._id.toString()) { %>
   <div class="btn-container my-4 d-flex gap-2">
     <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4 fw-semibold rounded-3 shadow-sm"
@@ -52,7 +52,7 @@
   <% } %> 
   </div> <!-- Close card-body -->
   </div> <!-- Close card -->  <!-- Leave a Review -->
-  <% if(currUser) { %>
+  <% if(locals.currUser) { %>
   <div class="card shadow-sm border-0 mb-4 rounded-4">
     <div class="card-body p-4">
       <h4 class="mb-4 fw-bold"><i class="fa-solid fa-pen-nib me-2 text-primary"></i>Leave a Review</h4>
@@ -116,7 +116,7 @@
               </div>
               <p class="card-text text-muted mb-3"><%= review.comment %></p>
               
-              <% if (currUser && currUser._id.toString() === review.author._id.toString()) { %>
+              <% if (locals.currUser && locals.currUser._id.toString() === review.author._id.toString()) { %>
               <form
                 method="POST"
                 action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
