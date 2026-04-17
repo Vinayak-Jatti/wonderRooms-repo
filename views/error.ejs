@@ -1,17 +1,22 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="container mt-5">
-  <div
-    class="alert alert-danger border-0 rounded-4 shadow p-4 text-center"
-    style="
-      backdrop-filter: blur(10px);
-      background: rgb(255, 255, 255);
-      color: rgb(93, 1, 1);
-    "
-    role="alert"
-  >
-    <h5 class="fw-bold mb-2">⚠ Attention Required</h5>
-    <p class="mb-0">Something went wrong. Please check the details.</p>
-    <p><%= err.message %></p>
+<div class="row align-items-center justify-content-center min-vh-100 mt-5">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card shadow-lg border-0 rounded-4 text-center overflow-hidden" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px);">
+      <div class="card-body p-5">
+        <i class="fa-solid fa-triangle-exclamation text-danger mb-4" style="font-size: 5rem;"></i>
+        <h2 class="fw-bold text-dark mb-3">Oops! Something went wrong</h2>
+        <p class="text-muted fs-5 mb-4"><%= err.message || "We encountered an unexpected issue." %></p>
+        
+        <div class="d-flex justify-content-center gap-3 mt-4">
+          <button onclick="window.history.back()" class="btn btn-outline-dark fw-bold px-4 rounded-pill">
+            <i class="fa-solid fa-arrow-left me-2"></i>Go Back
+          </button>
+          <a href="/listings" class="btn btn-primary fw-bold px-4 rounded-pill shadow-sm">
+            <i class="fa-solid fa-house me-2"></i>Return Home
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

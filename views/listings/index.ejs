@@ -116,9 +116,11 @@
       <a href="/listings/<%= listing._id %>" class="listing-link">
         <div class="card listing shadow-sm" data-price="<%= listing.price || 0 %>">
           <img
-            src="<%= listing.image && listing.image.url ? listing.image.url : '/images/default.jpg' %>"
-            class="card-img-top"
+            src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' %>"
+            class="card-img-top img-fluid w-100"
             alt="Listing-image"
+            style="object-fit: cover; aspect-ratio: 4/3;"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
           />
           <div class="card-body border-top">
             <p class="card-text">
