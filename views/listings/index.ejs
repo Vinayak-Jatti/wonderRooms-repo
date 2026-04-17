@@ -111,26 +111,36 @@
 
   <!-- Listings -->
   <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1" id="listings">
-    <% for (let listing of allListings) { %>
-    <a href="/listings/<%= listing._id %>" class="listing-link">
-      <div class="card listing" data-price="<%= listing.price || 0 %>">
-        <img
-          src="<%= listing.image && listing.image.url ? listing.image.url : '/images/default.jpg' %>"
-          class="card-img-top"
-          alt="Listing-image"
-          style="height: 20rem"
-        />
-        <div class="card-body">
-          <p class="card-text">
-            <b><%= listing.title %><br /></b>
-            <span class="price"
-              >&#8377;<%= listing.price ? listing.price.toLocaleString("en-IN")
-              : "N/A" %></span
-            >/night
-          </p>
+    <% if(allListings && allListings.length > 0) { %>
+      <% for (let listing of allListings) { %>
+      <a href="/listings/<%= listing._id %>" class="listing-link">
+        <div class="card listing shadow-sm" data-price="<%= listing.price || 0 %>">
+          <img
+            src="<%= listing.image && listing.image.url ? listing.image.url : '/images/default.jpg' %>"
+            class="card-img-top"
+            alt="Listing-image"
+          />
+          <div class="card-body border-top">
+            <p class="card-text">
+              <b class="listing-title"><%= listing.title %><br /></b>
+              <span class="text-muted"><i class="fa-solid fa-location-dot me-1"></i><%= listing.location %>, <%= listing.country %></span><br/>
+              <span class="price fw-bold text-dark mt-2 d-inline-block"
+                >&#8377;<%= listing.price ? listing.price.toLocaleString("en-IN")
+                : "N/A" %></span
+              ><span class="text-muted"> / night</span>
+            </p>
+          </div>
         </div>
+      </a>
+      <% } %>
+    <% } else { %>
+      <div class="col-12 mt-5 text-center empty-state w-100">
+        <div class="empty-state-icon">
+          <i class="fa-solid fa-magnifying-glass-location"></i>
+        </div>
+        <h3 class="fw-bold mt-3 text-dark">No destinations found!</h3>
+        <p class="text-secondary">We couldn't find anything matching your search. <br/><a href="/listings" class="btn btn-outline-danger btn-sm mt-3 fw-bold">Explore All Rooms</a></p>
       </div>
-    </a>
     <% } %>
   </div>
 </body>

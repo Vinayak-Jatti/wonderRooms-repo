@@ -2,8 +2,20 @@ const Listing = require("../models/listing");
 
 // Index - All Listings
 module.exports.index = async (req, res) => {
-  const allListings = await Listing.find({});
-  res.render("listings/index", { allListings });
+  const { q } = req.query;
+  let query = {};
+  if (q) {
+    const regex = new RegExp(q, "i"); // Case-insensitive exact or partial match
+    query = {
+      $or: [
+        { title: regex },
+        { location: regex },
+        { country: regex }
+      ]
+    };
+  }
+  const allListings = await Listing.find(query);
+  res.render("listings/index", { allListings, searchQuery: q });
 };
 
 // New Form

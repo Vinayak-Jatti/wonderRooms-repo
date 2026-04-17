@@ -1,75 +1,74 @@
-<style>
-  .btn-search {
-    background-color: #fe424d;
-    color: #fff;
-    border: none;
-    padding: 0 1rem 0 1rem;
-    border-radius: 25px;
-    cursor: pointer;
-  }
-
-  .btn-search:hover {
-    background-color: #ff5b66;
-    color: #fff;
-  }
-
-  .btn-search i {
-    display: inline;
-    margin: 0.5rem;
-  }
-
-  .input-search {
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 0.8rem;
-  }
-
-  @media (max-width: 576px) {
-    .nav-bar .nav-link {
-      display: none;
-    }
-  }
-</style>
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-lg border-bottom sticky-top custom-navbar shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"
-      ><i class="fa-solid fa-compass"></i
-    ></a>
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/listings">
+      <i class="fa-solid fa-compass brand-icon"></i>
+      <span class="brand-text">WonderRooms</span>
+    </a>
+
+    <!-- Hamburger Toggle for Mobile -->
     <button
-      class="navbar-toggler"
+      class="navbar-toggler custom-toggler"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">WonderRooms</a>
-      </div>
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-          <input
-            class="form-control me-2 input-search"
-            type="search"
-            placeholder="Search Your destination here!"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success btn-search" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>Search
-          </button>
-        </form>
-      </div>
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">+Add Your Room</a>
-        <span> </span>
+
+    <!-- Collapsible Content -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      
+      <!-- Center: Search Form -->
+      <ul class="navbar-nav mx-auto my-2 my-lg-0">
+        <li class="nav-item">
+          <form class="d-flex search-form" role="search" action="/listings" method="GET">
+            <div class="search-input-wrapper position-relative">
+              <i class="fa-solid fa-magnifying-glass search-icon-left position-absolute top-50 translate-middle-y"></i>
+              <input
+                class="form-control input-search"
+                type="search"
+                name="q"
+                placeholder="Search destinations, countries..."
+                aria-label="Search"
+              />
+              <button class="btn btn-search position-absolute top-50 translate-middle-y end-0" type="submit">
+                Search
+              </button>
+            </div>
+          </form>
+        </li>
+      </ul>
+
+      <!-- Right: User Actions -->
+      <ul class="navbar-nav ms-auto align-items-center gap-3">
+        <li class="nav-item">
+          <a class="nav-link add-room-btn fw-semibold" href="/listings/new">
+            <i class="fa-solid fa-plus me-1"></i> Add Your Room
+          </a>
+        </li>
+        
         <% if(!currUser) { %>
-        <a class="nav-link" href="/signup"><b>Sign-Up</b></a>
-        <a class="nav-link" href="/login"><b>Log-In</b></a>
-        <% } %> <% if(currUser) { %>
-        <a class="nav-link" href="/logout"><b>Log-Out</b></a>
+          <li class="nav-item">
+            <a class="nav-link auth-link fw-bold" href="/signup">Sign-Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link auth-link login-btn fw-bold" href="/login">Log-In</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle user-profile-link fw-bold d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-circle-user fs-4"></i> <%= currUser.username || 'Account' %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end custom-dropdown shadow" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket me-2 text-danger"></i>Log-Out</a></li>
+            </ul>
+          </li>
         <% } %>
-      </div>
+      </ul>
     </div>
   </div>
 </nav>
