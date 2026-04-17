@@ -88,7 +88,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.messages = req.session.messages || {};
   req.session.messages = {};
-  res.locals.currUser = req.user;
+  res.locals.currUser = req.user || null;
   next();
 });
 
