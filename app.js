@@ -15,7 +15,6 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const passport = require("passport");
 const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
 const compression = require("compression");
 
 const listingsRouter = require("./routes/listings.js");
@@ -33,6 +32,7 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
+      scriptSrcAttr: ["'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net", "cdnjs.cloudflare.com", "fonts.googleapis.com"],
       fontSrc: ["'self'", "fonts.gstatic.com", "cdnjs.cloudflare.com", "cdn.jsdelivr.net"],
       imgSrc: ["'self'", "data:", "blob:", "*.unsplash.com", "images.unsplash.com", "res.cloudinary.com"],
@@ -42,17 +42,16 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,
 }));
 
-app.use(mongoSanitize({ replaceWith: "_" }));
 app.use(compression());
 
 /* ========== App Configuration ========== */
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public"))); // Serve static files extremely early to prevent MIME blocks
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "public")));
 
 /* ========== Session Store ========== */
 const store = MongoStore.create({

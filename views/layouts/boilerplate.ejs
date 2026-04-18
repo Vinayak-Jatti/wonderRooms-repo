@@ -32,10 +32,10 @@
     <%- include("../include/navbar") %>
 
     <div class="flash-container">
-      <% if (messages.success) { %>
+      <% if (locals.messages && locals.messages.success) { %>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <i class="fa-solid fa-circle-check me-2"></i>
-        <%= messages.success %>
+        <%= locals.messages.success %>
         <button
           type="button"
           class="btn-close"
@@ -43,10 +43,10 @@
         ></button>
       </div>
       <% } %>
-      <% if (messages.error) { %>
+      <% if (locals.messages && locals.messages.error) { %>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="fa-solid fa-circle-xmark me-2"></i>
-        <%= messages.error %>
+        <%= locals.messages.error %>
         <button
           type="button"
           class="btn-close"
