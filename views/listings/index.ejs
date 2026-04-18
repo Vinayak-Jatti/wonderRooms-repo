@@ -1,91 +1,81 @@
 <% layout("/layouts/boilerplate") %>
 
 <section class="ribbon-wrapper">
-  <button class="scroll-btn scroll-left" id="scroll-left" aria-label="Scroll left">
-    <i class="fa-solid fa-chevron-left"></i>
-  </button>
+  <div class="container d-flex align-items-center position-relative">
+    <button class="scroll-btn scroll-left" id="scroll-left" aria-label="Scroll left">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
 
-  <div class="ribbon-container" id="ribbonContainer">
-    <div class="ribbon-item">
-      <i class="fa-solid fa-fire"></i><span>Trending</span>
+    <div class="ribbon-container" id="ribbonContainer">
+      <div class="ribbon-item active" data-category="trending">
+        <i class="fa-solid fa-fire"></i><span>Trending</span>
+      </div>
+      <div class="ribbon-item" data-category="rooms">
+        <i class="fa-solid fa-bed"></i><span>Rooms</span>
+      </div>
+      <div class="ribbon-item" data-category="cities">
+        <i class="fa-solid fa-city"></i><span>Cities</span>
+      </div>
+      <div class="ribbon-item" data-category="mountains">
+        <i class="fa-solid fa-mountain"></i><span>Mountains</span>
+      </div>
+      <div class="ribbon-item" data-category="castles">
+        <i class="fa-solid fa-chess-rook"></i><span>Castles</span>
+      </div>
+      <div class="ribbon-item" data-category="pools">
+        <i class="fa-solid fa-water-ladder"></i><span>Pools</span>
+      </div>
+      <div class="ribbon-item" data-category="camping">
+        <i class="fa-solid fa-campground"></i><span>Camping</span>
+      </div>
+      <div class="ribbon-item" data-category="farms">
+        <i class="fa-solid fa-tractor"></i><span>Farms</span>
+      </div>
+      <div class="ribbon-item" data-category="arctic">
+        <i class="fa-solid fa-snowflake"></i><span>Arctic</span>
+      </div>
+      <div class="ribbon-item" data-category="domes">
+        <i class="fa-solid fa-igloo"></i><span>Domes</span>
+      </div>
+      <div class="ribbon-item" data-category="boats">
+        <i class="fa-solid fa-sailboat"></i><span>Boats</span>
+      </div>
+      <div class="ribbon-item" data-category="beach">
+        <i class="fa-solid fa-umbrella-beach"></i><span>Beach</span>
+      </div>
+      <div class="ribbon-item" data-category="forest">
+        <i class="fa-solid fa-tree"></i><span>Forest</span>
+      </div>
+      <div class="ribbon-item" data-category="hiking">
+        <i class="fa-solid fa-person-hiking"></i><span>Hiking</span>
+      </div>
+      <div class="ribbon-item" data-category="skiing">
+        <i class="fa-solid fa-person-skiing"></i><span>Skiing</span>
+      </div>
+      <div class="ribbon-item" data-category="hottubs">
+        <i class="fa-solid fa-hot-tub-person"></i><span>Hot Tubs</span>
+      </div>
+      <div class="ribbon-item" data-category="fishing">
+        <i class="fa-solid fa-fish"></i><span>Fishing</span>
+      </div>
+      <div class="ribbon-item" data-category="nightskies">
+        <i class="fa-solid fa-moon"></i><span>Night Skies</span>
+      </div>
+      <div class="ribbon-item" data-category="nature">
+        <i class="fa-solid fa-leaf"></i><span>Nature</span>
+      </div>
+      <div class="ribbon-item" data-category="modern">
+        <i class="fa-solid fa-building"></i><span>Modern</span>
+      </div>
+      <div class="ribbon-item" data-category="party">
+        <i class="fa-solid fa-champagne-glasses"></i><span>Party</span>
+      </div>
     </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-bed"></i><span>Rooms</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-city"></i><span>Cities</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-mountain"></i><span>Mountains</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-chess-rook"></i><span>Castles</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-water-ladder"></i><span>Pools</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-campground"></i><span>Camping</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-tractor"></i><span>Farms</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-snowflake"></i><span>Arctic</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-igloo"></i><span>Domes</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-sailboat"></i><span>Boats</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-umbrella-beach"></i><span>Beach</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-tree"></i><span>Forest</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-person-hiking"></i><span>Hiking</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-person-skiing"></i><span>Skiing</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-hot-tub-person"></i><span>Hot Tubs</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-fish"></i><span>Fishing</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-moon"></i><span>Night Skies</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-leaf"></i><span>Nature</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-building"></i><span>Modern</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-champagne-glasses"></i><span>Party</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-paw"></i><span>Pet-Friendly</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-wine-glass"></i><span>Vineyards</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-mountain-sun"></i><span>Scenic Views</span>
-    </div>
-    <div class="ribbon-item">
-      <i class="fa-solid fa-hotel"></i><span>Luxury</span>
-    </div>
+
+    <button class="scroll-btn scroll-right" id="scroll-right" aria-label="Scroll right">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
   </div>
-
-  <button class="scroll-btn scroll-right" id="scroll-right" aria-label="Scroll right">
-    <i class="fa-solid fa-chevron-right"></i>
-  </button>
 </section>
 
 <div class="filter-bar">
