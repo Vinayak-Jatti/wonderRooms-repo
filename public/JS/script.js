@@ -61,6 +61,20 @@
       }, false);
   });
 
+  /* ========== Navbar & Glass-morphism ========== */
+  const navbar = document.getElementById("mainNavbar");
+  if (navbar) {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
+
   /* ========== Scroll-to-Top Button ========== */
   const scrollTopBtn = document.getElementById("scrollTopBtn");
   if (scrollTopBtn) {

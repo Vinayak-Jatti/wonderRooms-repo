@@ -2,56 +2,66 @@
 
 <div class="row mt-4">
   <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-    <div class="card shadow-sm border-0 mb-4 rounded-4 overflow-hidden">
-      <div class="p-3">
-        <h3 class="mb-0 fw-bold text-dark"><%= listing.title %></h3>
+    <div class="card show-card border-0 shadow-sm rounded-5 overflow-hidden">
+      <div class="card-header bg-white border-0 py-4 px-4">
+        <h2 class="mb-1 fw-bold text-dark"><%= listing.title %></h2>
+        <div class="text-muted d-flex align-items-center gap-2">
+          <i class="fa-solid fa-location-dot text-primary"></i>
+          <span><%= listing.location %>, <%= listing.country %></span>
+        </div>
       </div>
-      <img
-        src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' %>"
-        alt="Listing Image"
-        class="card-img-top img-fluid w-100"
-        style="max-height: 500px; object-fit: cover;"
-        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
-      />
-      <div class="card-body p-4">
-    <p class="text-muted d-flex align-items-center mb-3">
-      <i class="fa-solid fa-user-circle fs-4 me-2 text-primary"></i>
-      <span>Owned by: <span class="fw-bold text-dark"><%= listing.owner ? listing.owner.username : "Unknown" %></span></span>
-    </p>
-    <p class="card-text"><%= listing.description %></p>
-    <p class="card-text">
-      <strong>Price:</strong>
-      &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A"
-      %>/night
-    </p>
-    <p class="card-text">
-      <strong>Location:</strong> <%= listing.location %>, <%= listing.country %>
-    </p>
-  </div>
+      
+      <div class="show-img-container px-4">
+        <img
+          src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' %>"
+          alt="<%= listing.title %>"
+          class="img-fluid w-100 rounded-4 shadow-sm"
+          style="height: 450px; object-fit: cover;"
+        />
+      </div>
 
-  <% if (locals.currUser && listing.owner && locals.currUser._id.toString() ===
-  listing.owner._id.toString()) { %>
-  <div class="btn-container my-4 d-flex gap-2">
-    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4 fw-semibold rounded-3 shadow-sm"
-      >Edit <i class="fa-solid fa-pen-to-square ms-1"></i></a
-    >
-    <form
-      method="POST"
-      action="/listings/<%= listing._id %>?_method=DELETE"
-      class="d-inline"
-    >
-      <button
-        type="submit"
-        class="btn btn-danger px-4 fw-semibold rounded-3 shadow-sm"
-        onclick="return confirm('Are you sure you want to delete this listing?');"
-      >
-        Delete <i class="fa-solid fa-trash ms-1"></i>
-      </button>
-    </form>
-  </div>
-  <% } %> 
-  </div> <!-- Close card-body -->
-  </div> <!-- Close card -->  <!-- Leave a Review -->
+      <div class="card-body p-4 p-md-5">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="fw-bold mb-3">About this space</h4>
+            <p class="card-text text-muted lh-lg"><%= listing.description %></p>
+            
+            <div class="host-info d-flex align-items-center gap-3 p-3 bg-light rounded-4 mt-4">
+              <i class="fa-solid fa-circle-user fs-1 text-primary"></i>
+              <div>
+                <span class="text-muted small d-block">Hosted by</span>
+                <span class="fw-bold text-dark fs-5"><%= listing.owner ? listing.owner.username : "Verified Host" %></span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4 mt-4 mt-md-0">
+            <div class="sticky-top" style="top: 100px;">
+              <div class="card border border-light rounded-4 shadow-sm p-4">
+                <div class="mb-3">
+                  <span class="fs-3 fw-bold">&#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %></span>
+                  <span class="text-muted"> / night</span>
+                </div>
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary btn-lg fw-bold rounded-3 py-3">Reserve Now</button>
+                  <p class="text-center text-muted small mt-2">You won't be charged yet</p>
+                </div>
+              </div>
+
+              <% if (locals.currUser && listing.owner && locals.currUser._id.toString() === listing.owner._id.toString()) { %>
+              <div class="d-flex gap-2 mt-3">
+                <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-dark flex-fill fw-bold rounded-3">Edit</a>
+                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="flex-fill">
+                  <button type="submit" class="btn btn-outline-danger w-100 fw-bold rounded-3" onclick="return confirm('Confirm deletion?');">Delete</button>
+                </form>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  <!-- Leave a Review -->
   <% if(locals.currUser) { %>
   <div class="card shadow-sm border-0 mb-4 rounded-4">
     <div class="card-body p-4">
