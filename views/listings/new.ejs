@@ -1,118 +1,66 @@
 <% layout("/layouts/boilerplate") %>
 
-<section class="clay-form-page">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-7">
-      <div class="clay-card">
-        <div class="clay-card-header">
-          <h3 class="clay-card-title">
-            <i class="fa-solid fa-circle-plus me-2"></i>Create New Listing
-          </h3>
-          <p class="text-muted mb-0 small">Fill in the details to list your space</p>
+<div class="row justify-content-center py-5">
+  <div class="col-12 col-md-10 col-lg-7">
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body p-4 p-md-5">
+        <div class="mb-5">
+          <h2 class="fw-bold text-dark mb-2">List your space</h2>
+          <p class="text-muted">Fill out the details below to help students find your room.</p>
         </div>
 
-        <form
-          action="/listings"
-          method="post"
-          class="needs-validation"
-          enctype="multipart/form-data"
-          novalidate
-        >
-          <div class="clay-form-group">
-            <label for="title" class="clay-label">
-              Title <span class="text-danger">*</span>
-            </label>
-            <input
-              type="text"
-              class="form-control clay-input"
-              id="title"
-              name="listing[title]"
-              placeholder="e.g. Cozy Mountain Cabin"
-              required
-            />
+        <form action="/listings" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+          <div class="mb-4">
+            <label for="title" class="form-label fw-bold small text-uppercase">Title</label>
+            <input type="text" class="form-control form-control-lg" id="title" name="listing[title]" placeholder="e.g. Spacious 1BHK near University" required />
             <div class="invalid-feedback">Please enter a title.</div>
           </div>
 
-          <div class="clay-form-group">
-            <label for="description" class="clay-label">Description</label>
-            <textarea
-              name="listing[description]"
-              id="description"
-              rows="4"
-              placeholder="Describe your space, amenities, and what makes it special..."
-              class="form-control clay-input"
-              required
-            ></textarea>
+          <div class="mb-4">
+            <label for="description" class="form-label fw-bold small text-uppercase">Description</label>
+            <textarea name="listing[description]" id="description" rows="5" class="form-control" placeholder="Tell students about the room, amenities, and nearby landmarks..." required></textarea>
             <div class="invalid-feedback">Please enter a description.</div>
           </div>
 
-          <div class="clay-form-group">
-            <label for="imageUrl" class="clay-label">
-              <i class="fa-solid fa-cloud-arrow-up me-1"></i>Upload Listing Image
-            </label>
-            <input
-              type="file"
-              class="form-control clay-input"
-              id="imageUrl"
-              name="listing[image]"
-              accept="image/*"
-            />
+          <div class="mb-4">
+            <label for="image" class="form-label fw-bold small text-uppercase">Upload Image</label>
+            <input type="file" class="form-control" id="image" name="listing[image]" accept="image/*" />
+            <div class="form-text">Choose a high-quality photo to attract more attention.</div>
           </div>
 
-          <div class="row g-3">
-            <div class="col-md-4">
-              <div class="clay-form-group">
-                <label for="price" class="clay-label">
-                  Price (₹/night) <span class="text-danger">*</span>
-                </label>
-                <input
-                  type="number"
-                  class="form-control clay-input"
-                  id="price"
-                  name="listing[price]"
-                  placeholder="2500"
-                  min="1"
-                  required
-                />
-                <div class="invalid-feedback">Please enter a price.</div>
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <label for="price" class="form-label fw-bold small text-uppercase">Price (₹/month)</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0">₹</span>
+                <input type="number" class="form-control border-start-0 ps-0" id="price" name="listing[price]" placeholder="12000" min="0" required />
+                <div class="invalid-feedback">Please enter a valid price.</div>
               </div>
             </div>
-            <div class="col-md-8">
-              <div class="clay-form-group">
-                <label for="country" class="clay-label">Country <span class="text-danger">*</span></label>
-                <input
-                  type="text"
-                  class="form-control clay-input"
-                  id="country"
-                  name="listing[country]"
-                  placeholder="e.g. India"
-                  required
-                />
-                <div class="invalid-feedback">Please enter a country.</div>
-              </div>
+            <div class="col-md-6">
+              <label for="country" class="form-label fw-bold small text-uppercase">Country</label>
+              <input type="text" class="form-control" id="country" name="listing[country]" placeholder="e.g. India" required />
+              <div class="invalid-feedback">Please enter a country.</div>
             </div>
           </div>
 
-          <div class="clay-form-group">
-            <label for="location" class="clay-label">
-              <i class="fa-solid fa-location-dot me-1"></i>Location <span class="text-danger">*</span>
-            </label>
-            <input
-              type="text"
-              class="form-control clay-input"
-              id="location"
-              name="listing[location]"
-              placeholder="e.g. Manali, Himachal Pradesh"
-              required
-            />
-            <div class="invalid-feedback">Please enter a location.</div>
+          <div class="mb-5">
+            <label for="location" class="form-label fw-bold small text-uppercase">Location</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-location-dot text-primary"></i></span>
+              <input type="text" class="form-control border-start-0 ps-0" id="location" name="listing[location]" placeholder="e.g. Indiranagar, Bangalore" required />
+              <div class="invalid-feedback">Please enter a location.</div>
+            </div>
           </div>
 
-          <button type="submit" class="btn btn-primary clay-submit-btn w-100">
-            <i class="fa-solid fa-plus me-2"></i>Add to Listings
-          </button>
+          <div class="d-grid gap-3 pt-3">
+            <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 rounded-3">
+              Proceed to List
+            </button>
+            <a href="/listings" class="btn btn-outline-dark btn-lg py-3 rounded-3 fw-semibold">Cancel</a>
+          </div>
         </form>
       </div>
     </div>
   </div>
-</section>
+</div>

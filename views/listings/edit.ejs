@@ -1,133 +1,70 @@
 <% layout("/layouts/boilerplate") %>
 
-<section class="clay-form-page">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-7">
-      <div class="clay-card">
-        <div class="clay-card-header">
-          <h3 class="clay-card-title">
-            <i class="fa-solid fa-pen-to-square me-2"></i>Edit Listing
-          </h3>
-          <p class="text-muted mb-0 small">Update your listing details below</p>
+<div class="row justify-content-center py-5">
+  <div class="col-12 col-md-10 col-lg-7">
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body p-4 p-md-5">
+        <div class="mb-5">
+          <h2 class="fw-bold text-dark mb-2">Edit your listing</h2>
+          <p class="text-muted">Update the details of your space to keep students informed.</p>
         </div>
 
-        <form
-          method="POST"
-          action="/listings/<%= listing._id %>?_method=PUT"
-          class="needs-validation"
-          enctype="multipart/form-data"
-          novalidate
-        >
-          <div class="clay-form-group">
-            <label for="title" class="clay-label">
-              Title <span class="text-danger">*</span>
-            </label>
-            <input
-              type="text"
-              class="form-control clay-input"
-              id="title"
-              name="listing[title]"
-              value="<%= listing.title %>"
-              placeholder="Enter Title"
-              required
-            />
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+          <div class="mb-4">
+            <label for="title" class="form-label fw-bold small text-uppercase">Title</label>
+            <input type="text" class="form-control form-control-lg" id="title" name="listing[title]" value="<%= listing.title %>" required />
             <div class="invalid-feedback">Please enter a title.</div>
           </div>
 
-          <div class="clay-form-group">
-            <label for="description" class="clay-label">Description</label>
-            <textarea
-              id="description"
-              name="listing[description]"
-              rows="4"
-              placeholder="Enter Description"
-              class="form-control clay-input"
-              required
-            ><%= listing.description %></textarea>
+          <div class="mb-4">
+            <label for="description" class="form-label fw-bold small text-uppercase">Description</label>
+            <textarea name="listing[description]" id="description" rows="5" class="form-control" required><%= listing.description %></textarea>
             <div class="invalid-feedback">Please enter a description.</div>
           </div>
 
-          <% if (ogUrl) { %>
-          <div class="clay-form-group">
-            <label class="clay-label">Current Image</label>
-            <div class="clay-image-preview">
-              <img
-                src="<%= ogUrl %>"
-                alt="Current listing image"
-                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';"
-              />
+          <div class="d-flex align-items-start gap-4 mb-4">
+            <% if (ogUrl) { %>
+              <div class="current-img-preview">
+                <p class="small fw-bold text-uppercase text-muted mb-2">Current Image</p>
+                <img src="<%= ogUrl %>" class="rounded-3" style="width: 120px; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--border-light);" />
+              </div>
+            <% } %>
+            <div class="flex-grow-1">
+              <label for="image" class="form-label fw-bold small text-uppercase">Upload New Image</label>
+              <input type="file" class="form-control" id="image" name="listing[image]" accept="image/*" />
             </div>
           </div>
-          <% } %>
 
-          <div class="clay-form-group">
-            <label for="imageUrl" class="clay-label">
-              <i class="fa-solid fa-cloud-arrow-up me-1"></i>Upload New Image
-            </label>
-            <input
-              type="file"
-              class="form-control clay-input"
-              id="imageUrl"
-              name="listing[image]"
-              accept="image/*"
-            />
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-4">
-              <div class="clay-form-group">
-                <label for="price" class="clay-label">Price (₹/night)</label>
-                <input
-                  type="number"
-                  class="form-control clay-input"
-                  id="price"
-                  name="listing[price]"
-                  value="<%= listing.price %>"
-                  placeholder="Enter Price"
-                  min="1"
-                  required
-                />
-                <div class="invalid-feedback">Please enter a price.</div>
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <label for="price" class="form-label fw-bold small text-uppercase">Price (₹/month)</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white border-end-0">₹</span>
+                <input type="number" class="form-control border-start-0 ps-0" id="price" name="listing[price]" value="<%= listing.price %>" min="0" required />
               </div>
             </div>
-            <div class="col-md-8">
-              <div class="clay-form-group">
-                <label for="country" class="clay-label">Country</label>
-                <input
-                  type="text"
-                  class="form-control clay-input"
-                  id="country"
-                  name="listing[country]"
-                  value="<%= listing.country %>"
-                  placeholder="Enter Country"
-                  required
-                />
-                <div class="invalid-feedback">Please enter a country.</div>
-              </div>
+            <div class="col-md-6">
+              <label for="country" class="form-label fw-bold small text-uppercase">Country</label>
+              <input type="text" class="form-control" id="country" name="listing[country]" value="<%= listing.country %>" required />
             </div>
           </div>
 
-          <div class="clay-form-group">
-            <label for="location" class="clay-label">
-              <i class="fa-solid fa-location-dot me-1"></i>Location
-            </label>
-            <input
-              type="text"
-              class="form-control clay-input"
-              id="location"
-              name="listing[location]"
-              value="<%= listing.location %>"
-              placeholder="Enter Location"
-              required
-            />
-            <div class="invalid-feedback">Please enter a location.</div>
+          <div class="mb-5">
+            <label for="location" class="form-label fw-bold small text-uppercase">Location</label>
+            <div class="input-group">
+              <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-location-dot text-primary"></i></span>
+              <input type="text" class="form-control border-start-0 ps-0" id="location" name="listing[location]" value="<%= listing.location %>" required />
+            </div>
           </div>
 
-          <button type="submit" class="btn btn-primary clay-submit-btn w-100">
-            <i class="fa-solid fa-check me-2"></i>Update Listing
-          </button>
+          <div class="d-grid gap-3 pt-3">
+            <button type="submit" class="btn btn-primary btn-lg fw-bold py-3 rounded-3 shadow-sm">
+              Save Changes
+            </button>
+            <a href="/listings/<%= listing._id %>" class="btn btn-outline-dark btn-lg py-3 rounded-3 fw-semibold">Discard Changes</a>
+          </div>
         </form>
       </div>
     </div>
   </div>
-</section>
+</div>

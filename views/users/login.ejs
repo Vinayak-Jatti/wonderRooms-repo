@@ -1,41 +1,43 @@
 <% layout("/layouts/boilerplate") %>
 
-<div class="row align-items-center justify-content-center min-vh-100 mt-5">
+<div class="row align-items-center justify-content-center min-vh-100">
   <div class="col-12 col-md-8 col-lg-5">
-    <div class="card shadow-lg border-0 rounded-4" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);">
+    <div class="card auth-card">
       <div class="card-body p-5">
         <div class="text-center mb-4">
-          <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3 shadow-sm" style="width: 60px; height: 60px;">
-            <i class="fa-solid fa-right-to-bracket fs-3"></i>
+          <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3 shadow-sm" style="width: 64px; height: 64px;">
+            <i class="fa-solid fa-user-check fs-3"></i>
           </div>
-          <h2 class="fw-bold text-dark">Welcome Back</h2>
-          <p class="text-muted">Login to continue your journey</p>
+          <h2 class="fw-bold text-dark">Welcome back</h2>
+          <p class="text-muted">Login to manage your listings and reviews</p>
         </div>
 
         <form action="/login" method="POST" class="needs-validation" novalidate>
-          <div class="form-floating mb-4">
-            <input type="text" class="form-control rounded-3" id="username" name="username" placeholder="Username" required />
-            <label for="username"><i class="fa-solid fa-user me-2 text-muted"></i>Username</label>
+          <div class="mb-4">
+            <label for="username" class="form-label fw-semibold small text-uppercase tracking-wider">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required />
             <div class="invalid-feedback">Please enter your username.</div>
           </div>
 
-          <div class="form-floating mb-4">
-            <input type="password" class="form-control rounded-3" id="password" name="password" placeholder="Password" required />
-            <label for="password"><i class="fa-solid fa-lock me-2 text-muted"></i>Password</label>
+          <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <label for="password" class="form-label fw-semibold small text-uppercase tracking-wider">Password</label>
+            </div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required />
             <div class="invalid-feedback">Please enter your password.</div>
           </div>
 
-          <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary btn-lg rounded-3 fw-bold shadow-sm transition-fast w-100 py-3">
-              Log In
+          <div class="d-grid mt-5">
+            <button type="submit" class="btn btn-primary btn-lg rounded-3 fw-bold py-3">
+              Continue
             </button>
           </div>
         </form>
 
-        <div class="mt-4 text-center">
-          <p class="mb-0 text-muted">
-            New to WonderRooms?
-            <a href="/signup" class="text-primary fw-bold text-decoration-none">Create an account</a>
+        <div class="mt-5 text-center">
+          <p class="mb-0 text-muted small">
+            Don't have an account?
+            <a href="/signup" class="text-primary fw-bold">Sign up</a>
           </p>
         </div>
       </div>
