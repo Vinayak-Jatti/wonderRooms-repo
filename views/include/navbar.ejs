@@ -1,94 +1,63 @@
 <nav class="navbar navbar-expand-lg sticky-top custom-navbar" id="mainNavbar">
-  <div class="container-fluid px-3 px-lg-4">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="/listings">
+  <div class="container container-navbar">
+    <a class="navbar-brand" href="/listings">
       <i class="fa-solid fa-compass brand-icon"></i>
       <span class="brand-text">WonderRooms</span>
     </a>
 
-    <div class="d-flex align-items-center gap-2 d-lg-none">
-      <button class="theme-toggle-btn" id="mobileThemeToggle" aria-label="Toggle dark mode">
-        <i class="fa-solid fa-moon"></i>
-      </button>
-      <button
-        class="navbar-toggler custom-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarContent"
-        aria-controls="navbarContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
+    <!-- Mobile Toggler -->
+    <button
+      class="navbar-toggler border-0 shadow-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa-solid fa-bars fs-4"></i>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav mx-auto my-2 my-lg-0">
-        <li class="nav-item">
-          <form class="d-flex search-form" role="search" action="/listings" method="GET">
-            <div class="search-input-wrapper">
-              <i class="fa-solid fa-magnifying-glass search-icon-left"></i>
-              <input
-                class="form-control input-search"
-                type="search"
-                name="q"
-                placeholder="Where are you going?"
-                aria-label="Search"
-                autocomplete="off"
-              />
-              <button class="btn btn-search" type="submit">Search</button>
-            </div>
-          </form>
-        </li>
-      </ul>
-
-      <ul class="navbar-nav ms-auto align-items-center gap-2 gap-lg-3">
-        <li class="nav-item d-none d-lg-block">
-          <button class="theme-toggle-btn" id="desktopThemeToggle" aria-label="Toggle dark mode">
-            <i class="fa-solid fa-moon"></i>
+      <form class="search-form mx-auto" role="search" action="/listings" method="GET">
+        <div class="search-input-wrapper">
+          <input
+            class="form-control input-search"
+            type="search"
+            name="q"
+            placeholder="Search rooms, cabins, apartments..."
+            aria-label="Search"
+            autocomplete="off"
+          />
+          <button class="btn-search-icon" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
           </button>
-        </li>
+        </div>
+      </form>
 
-        <li class="nav-item">
-          <a class="nav-link add-room-btn fw-semibold" href="/listings/new">
-            <i class="fa-solid fa-plus me-1"></i> Add Your Room
-          </a>
-        </li>
+      <div class="navbar-nav auth-nav align-items-center">
+        <a class="nav-link add-room-btn d-none d-lg-block" href="/listings/new">
+          Add Your Room
+        </a>
 
         <% if(!locals.currUser) { %>
-          <li class="nav-item">
-            <a class="nav-link auth-link fw-bold" href="/signup">Sign Up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link auth-link login-btn fw-bold" href="/login">Log In</a>
-          </li>
+          <a class="nav-link fw-bold text-dark px-3" href="/signup">Sign Up</a>
+          <a class="nav-link login-btn" href="/login">Log In</a>
         <% } else { %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle user-profile-link fw-bold d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-circle-user fs-4"></i>
-              <span class="d-none d-lg-inline"><%= locals.currUser.username || 'Account' %></span>
+              <span class="d-none d-sm-inline"><%= locals.currUser.username %></span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end custom-dropdown shadow-lg" aria-labelledby="userDropdown">
-              <li>
-                <a class="dropdown-item" href="/listings">
-                  <i class="fa-solid fa-house me-2 text-primary"></i>All Listings
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/listings/new">
-                  <i class="fa-solid fa-circle-plus me-2 text-success"></i>New Listing
-                </a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="/logout">
-                  <i class="fa-solid fa-arrow-right-from-bracket me-2 text-danger"></i>Log Out
-                </a>
-              </li>
+            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg p-2" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item rounded-2" href="/listings">All Listings</a></li>
+              <li><a class="dropdown-item rounded-2" href="/listings/new">New Listing</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item rounded-2 text-danger" href="/logout">Log Out</a></li>
             </ul>
-          </li>
+          </div>
         <% } %>
-      </ul>
+      </div>
     </div>
   </div>
 </nav>

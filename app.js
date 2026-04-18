@@ -22,6 +22,7 @@ const reviewsRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/auth.js");
 
 const app = express();
+app.set("trust proxy", 1); // Required for express-rate-limit on Render/proxies
 const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.ATLASDB_URL;
 const SESSION_SECRET = process.env.SECRET;

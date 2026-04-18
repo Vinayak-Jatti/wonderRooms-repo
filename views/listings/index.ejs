@@ -118,25 +118,27 @@
               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';"
             />
           </div>
-          <button
-            class="heart-btn"
-            data-id="<%= listing._id %>"
-            aria-label="Save listing"
-            onclick="event.preventDefault();event.stopPropagation();"
-          >
-            <i class="fa-heart"></i>
-          </button>
           <div class="card-body">
-            <p class="card-text mb-0">
-              <b class="listing-title"><%= listing.title %></b>
-              <br />
-              <span class="text-muted small">
-                <i class="fa-solid fa-location-dot me-1"></i><%= listing.location %>, <%= listing.country %>
-              </span>
-              <br />
-              <span class="price fw-bold mt-1 d-inline-block">&#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %></span>
-              <span class="text-muted small"> / night</span>
-            </p>
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <b class="listing-title"><%= listing.title %></b>
+                <p class="text-muted small mb-1">
+                  <i class="fa-solid fa-location-dot me-1"></i><%= listing.location %>, <%= listing.country %>
+                </p>
+                <div class="mt-1">
+                  <span class="price fw-bold">&#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %></span>
+                  <span class="text-muted small"> / night</span>
+                </div>
+              </div>
+              <button
+                class="heart-btn"
+                data-id="<%= listing._id %>"
+                aria-label="Save listing"
+                onclick="event.preventDefault();event.stopPropagation();"
+              >
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </div>
           </div>
         </div>
       </a>

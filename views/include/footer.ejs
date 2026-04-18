@@ -1,24 +1,49 @@
-<footer>
-  <div class="f-info">
-    <div class="f-info-socials">
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-        <i class="fa-brands fa-square-facebook"></i>
-      </a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <i class="fa-brands fa-square-instagram"></i>
-      </a>
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <i class="fa-brands fa-square-linkedin"></i>
-      </a>
-      <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
-        <i class="fa-brands fa-square-x-twitter"></i>
-      </a>
+<footer class="footer mt-auto py-5 border-top bg-white">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-lg-3 g-5">
+      <div class="col">
+        <h5 class="fw-bold text-primary mb-3">WonderRooms</h5>
+        <p class="text-muted small">Discover verified student rooms and high-end apartments in India's top cities. Experience luxury and comfort tailored for modern urban living.</p>
+        <div class="d-flex gap-3 mt-4">
+          <a href="#" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      
+      <div class="col">
+        <h6 class="fw-bold mb-4">Support</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2 small">
+          <li><a href="#" class="text-muted hover-primary">Help Center</a></li>
+          <li><a href="#" class="text-muted hover-primary">AirCover</a></li>
+          <li><a href="#" class="text-muted hover-primary">Anti-discrimination</a></li>
+          <li><a href="#" class="text-muted hover-primary">Disability support</a></li>
+          <li><a href="#" class="text-muted hover-primary">Cancellation options</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h6 class="fw-bold mb-4">Company</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2 small">
+          <li><a href="#" class="text-muted hover-primary">About Us</a></li>
+          <li><a href="#" class="text-muted hover-primary">Careers</a></li>
+          <li><a href="#" class="text-muted hover-primary">Investors</a></li>
+          <li><a href="/privacy" class="text-muted hover-primary">Privacy Policy</a></li>
+          <li><a href="/terms" class="text-muted hover-primary">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="fa-brand">&copy; <%= new Date().getFullYear() %> WonderRooms Private Limited</div>
-    <div class="f-info-links">
-      <a href="/privacy">Privacy Policy</a>
-      <span class="text-muted mx-1">&middot;</span>
-      <a href="/terms">Terms &amp; Conditions</a>
+
+    <div class="row mt-5 pt-4 border-top">
+      <div class="col-12 col-md-6 text-center text-md-start">
+        <p class="text-muted small mb-0">&copy; <%= new Date().getFullYear() %> WonderRooms Private Limited. All rights reserved.</p>
+      </div>
+      <div class="col-12 col-md-6 text-center text-md-end mt-3 mt-md-0">
+        <div class="d-inline-flex gap-3 small">
+          <span class="text-muted cursor-pointer hover-primary"><i class="fa-solid fa-earth-americas me-1"></i> English (IN)</span>
+          <span class="text-muted cursor-pointer hover-primary"><i class="fa-solid fa-indian-rupee-sign me-1"></i> INR</span>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
