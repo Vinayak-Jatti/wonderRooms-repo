@@ -100,7 +100,7 @@ mongoose.connection.on("disconnected", () => {
 
 /* ========== Routes ========== */
 app.get("/", (req, res) => {
-  res.redirect("https://wonderrooms-home.onrender.com");
+  res.redirect("/listings");
 });
 
 app.use("/listings", listingsRouter);
